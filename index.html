@@ -61,7 +61,7 @@
 
     button {
       width: 100%;
-      margin-top: 20px;
+      margin-top: 15px;
       padding: 15px;
       border: none;
       border-radius: 10px;
@@ -73,6 +73,32 @@
 
     button:active {
       transform: scale(0.98);
+    }
+
+    .secondary-button {
+      background: #666;
+    }
+
+    .save-button {
+      background: #111;
+      margin-top: 25px;
+    }
+
+    .set-list {
+      margin-top: 20px;
+    }
+
+    .set-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #ddd;
+      padding: 14px 0;
+      font-size: 18px;
+    }
+
+    .set-number {
+      font-weight: bold;
     }
 
     .record {
@@ -87,18 +113,26 @@
     .exercise {
       font-size: 20px;
       font-weight: bold;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
 
     .details {
       color: #555;
       font-size: 16px;
+      line-height: 1.7;
     }
 
     .empty {
       text-align: center;
       color: #888;
       padding: 20px 0;
+    }
+
+    .small-note {
+      color: #777;
+      font-size: 14px;
+      margin-top: 10px;
+      line-height: 1.5;
     }
   </style>
 </head>
@@ -109,6 +143,7 @@
 
     <h1>BODY CARE AI</h1>
 
+    <!-- トレーニング入力 -->
     <div class="card">
 
       <label for="exercise">種目</label>
@@ -136,6 +171,7 @@
         id="weight"
         placeholder="例：70"
         inputmode="decimal"
+        step="0.5"
       >
 
 
@@ -149,13 +185,33 @@
       >
 
 
-      <button onclick="addRecord()">
-        記録する
+      <button
+        type="button"
+        onclick="addSet()">
+        セットを追加
       </button>
+
+
+      <!-- 現在のセット -->
+      <div class="set-list" id="currentSets"></div>
+
+
+      <button
+        type="button"
+        class="save-button"
+        onclick="saveWorkout()">
+        トレーニングを保存
+      </button>
+
+
+      <div class="small-note">
+        セットを追加してから「トレーニングを保存」を押してください。
+      </div>
 
     </div>
 
 
+    <!-- 保存済み記録 -->
     <div class="card">
 
       <h2>トレーニング記録</h2>
@@ -175,7 +231,14 @@
 
   <script>
 
+    // 現在入力中のセット
+    let currentSets = [];
+
+
+    // --------------------------------
     // 保存されている記録を読み込む
+    // --------------------------------
+
     function loadRecords() {
 
       const savedRecords =
@@ -188,70 +251,34 @@
       const records =
         JSON.parse(savedRecords);
 
-      // 古い記録から順番に表示
+
       records.forEach(record => {
 
-        displayRecord(
-          record.exercise,
-          record.weight,
-          record.reps
-        );
+        displayRecord(record);
 
       });
     }
 
 
-    // 記録を保存する
+    // --------------------------------
+    // 記録を保存
+    // --------------------------------
+
     function saveRecords(records) {
 
       localStorage.setItem(
         "trainingRecords",
         JSON.stringify(records)
       );
+
     }
 
 
-    // 画面に記録を表示する
-    function displayRecord(
-      exercise,
-      weight,
-      reps
-    ) {
+    // --------------------------------
+    // セットを追加
+    // --------------------------------
 
-      const recordsArea =
-        document.getElementById("records");
-
-      const empty =
-        recordsArea.querySelector(".empty");
-
-      if (empty) {
-        empty.remove();
-      }
-
-
-      const record =
-        document.createElement("div");
-
-      record.className = "record";
-
-
-      record.innerHTML = `
-        <div class="exercise">
-          ${exercise}
-        </div>
-
-        <div class="details">
-          ${weight} kg × ${reps} 回
-        </div>
-      `;
-
-
-      recordsArea.prepend(record);
-    }
-
-
-    // 新しい記録を追加する
-    function addRecord() {
+    function addSet() {
 
       const exercise =
         document.getElementById("exercise").value;
@@ -263,7 +290,6 @@
         document.getElementById("reps").value;
 
 
-      // 入力チェック
       if (!exercise || !weight || !reps) {
 
         alert(
@@ -274,18 +300,21 @@
       }
 
 
-      // 現在の保存データを取得
-      const savedRecords =
-        localStorage.getItem("trainingRecords");
+      // 種目が途中で変わるのを防ぐ
+      if (
+        currentSets.length > 0 &&
+        currentSets[0].exercise !== exercise
+      ) {
 
-      const records =
-        savedRecords
-          ? JSON.parse(savedRecords)
-          : [];
+        alert(
+          "同じ種目のセットを追加してください"
+        );
+
+        return;
+      }
 
 
-      // 新しい記録を追加
-      records.unshift({
+      currentSets.push({
 
         exercise: exercise,
 
@@ -296,28 +325,209 @@
       });
 
 
-      // 保存
+      renderCurrentSets();
+
+
+      // 重量と回数だけリセット
+      document.getElementById("weight").value = "";
+      document.getElementById("reps").value = "";
+
+    }
+
+
+    // --------------------------------
+    // 現在のセットを画面表示
+    // --------------------------------
+
+    function renderCurrentSets() {
+
+      const area =
+        document.getElementById("currentSets");
+
+      area.innerHTML = "";
+
+
+      currentSets.forEach((set, index) => {
+
+        const item =
+          document.createElement("div");
+
+        item.className = "set-item";
+
+
+        item.innerHTML = `
+          <span class="set-number">
+            セット ${index + 1}
+          </span>
+
+          <span>
+            ${set.weight} kg × ${set.reps} 回
+          </span>
+        `;
+
+
+        area.appendChild(item);
+
+      });
+
+
+      // セットがある場合は種目を変更できないようにする
+      document.getElementById("exercise").disabled =
+        currentSets.length > 0;
+
+    }
+
+
+    // --------------------------------
+    // トレーニングを保存
+    // --------------------------------
+
+    function saveWorkout() {
+
+      if (currentSets.length === 0) {
+
+        alert(
+          "まずセットを追加してください"
+        );
+
+        return;
+      }
+
+
+      const savedRecords =
+        localStorage.getItem("trainingRecords");
+
+
+      const records =
+        savedRecords
+          ? JSON.parse(savedRecords)
+          : [];
+
+
+      // 新しい形式のトレーニング記録
+      const workout = {
+
+        type: "workout",
+
+        exercise:
+          currentSets[0].exercise,
+
+        sets:
+          currentSets.map(set => ({
+
+            weight: set.weight,
+
+            reps: set.reps
+
+          }))
+
+      };
+
+
+      records.unshift(workout);
+
+
       saveRecords(records);
 
 
       // 画面に表示
-      displayRecord(
-        exercise,
-        weight,
-        reps
-      );
+      displayRecord(workout);
 
 
-      // 入力欄をリセット
+      // 現在のセットをリセット
+      currentSets = [];
+
+      renderCurrentSets();
+
+      document.getElementById("exercise").disabled = false;
+
       document.getElementById("exercise").value = "";
 
       document.getElementById("weight").value = "";
 
       document.getElementById("reps").value = "";
+
     }
 
 
-    // ページを開いたときに保存データを読み込む
+    // --------------------------------
+    // 保存記録を画面表示
+    // --------------------------------
+
+    function displayRecord(record) {
+
+      const recordsArea =
+        document.getElementById("records");
+
+
+      const empty =
+        recordsArea.querySelector(".empty");
+
+
+      if (empty) {
+        empty.remove();
+      }
+
+
+      const item =
+        document.createElement("div");
+
+      item.className = "record";
+
+
+      // 新しい複数セット形式
+      if (
+        record.type === "workout" &&
+        Array.isArray(record.sets)
+      ) {
+
+        let setsText = "";
+
+        record.sets.forEach((set, index) => {
+
+          setsText +=
+            `セット ${index + 1}：${set.weight} kg × ${set.reps} 回<br>`;
+
+        });
+
+
+        item.innerHTML = `
+          <div class="exercise">
+            ${record.exercise}
+          </div>
+
+          <div class="details">
+            ${setsText}
+          </div>
+        `;
+
+      }
+
+      // STEP 0.5 / STEP 1 の古い形式
+      else {
+
+        item.innerHTML = `
+          <div class="exercise">
+            ${record.exercise}
+          </div>
+
+          <div class="details">
+            ${record.weight} kg × ${record.reps} 回
+          </div>
+        `;
+
+      }
+
+
+      recordsArea.prepend(item);
+
+    }
+
+
+    // --------------------------------
+    // ページ読み込み時
+    // --------------------------------
+
     loadRecords();
 
   </script>
