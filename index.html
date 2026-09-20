@@ -91,6 +91,7 @@ button:active{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:10px;
   border-top:1px solid #ddd;
   padding:14px 0;
   font-size:18px
@@ -98,6 +99,14 @@ button:active{
 
 .set-number{
   font-weight:bold
+}
+
+.set-delete{
+  width:auto;
+  margin:0;
+  padding:8px 12px;
+  background:#d62828;
+  font-size:14px
 }
 
 
@@ -1316,6 +1325,35 @@ function addSet(){
 
 
 /* =========================
+   入力中セット削除
+========================= */
+
+function deleteCurrentSet(index){
+
+  if(
+    index < 0 ||
+    index >= currentSets.length
+  ){
+
+    return;
+
+  }
+
+
+  currentSets.splice(
+    index,
+    1
+  );
+
+
+  renderCurrentSets();
+
+  updateTodayTotal();
+
+}
+
+
+/* =========================
    入力中セット表示
 ========================= */
 
@@ -1358,10 +1396,21 @@ function renderCurrentSets(){
 
         </span>
 
+        <button
+          type="button"
+          class="set-delete"
+          onclick="deleteCurrentSet(${index})">
+
+          削除
+
+        </button>
+
       `;
 
 
-      area.appendChild(item);
+      area.appendChild(
+        item
+      );
 
     }
   );
@@ -2034,166 +2083,4 @@ function renderHistory(){
 
           </div>
 
-          <div class="workout-title">
-
-            トレーニング
-
-          </div>
-
-          ${exercisesHTML}
-
-          <div class="day-total">
-
-            1日の総負荷：
-            ${dayTotal.toLocaleString()}
-            kg
-
-          </div>
-
-          <button
-            class="delete-button"
-            onclick="deleteWorkout('${record.date}')">
-
-            この記録を削除
-
-          </button>
-
-        `;
-
-
-        area.appendChild(
-          item
-        );
-
-      }
-    );
-
-}
-
-
-/* =========================
-   1日削除
-========================= */
-
-function deleteWorkout(date){
-
-  const ok =
-    confirm(
-      `${formatDate(date)}のトレーニング記録を削除しますか？`
-    );
-
-
-  if(!ok){
-
-    return;
-
-  }
-
-
-  let history =
-    getHistory();
-
-
-  history =
-    history.filter(
-      record =>
-        record.date !== date
-    );
-
-
-  saveHistory(
-    history
-  );
-
-
-  renderHistory();
-
-  renderTodayExercises();
-
-  updateTodayTotal();
-
-  updatePreviousRecord();
-
-}
-
-
-/* =========================
-   種目変更
-========================= */
-
-document
-  .getElementById(
-    "exercise"
-  )
-  .addEventListener(
-    "change",
-    function(){
-
-      updatePreviousRecord();
-
-      renderTodayExercises();
-
-    }
-  );
-
-
-/* =========================
-   日付変更
-========================= */
-
-document
-  .getElementById(
-    "trainingDate"
-  )
-  .addEventListener(
-    "change",
-    function(){
-
-      currentSets = [];
-
-      currentExercises = [];
-
-
-      renderCurrentSets();
-
-
-      document.getElementById(
-        "exercise"
-      ).disabled = false;
-
-
-      document.getElementById(
-        "exercise"
-      ).value = "";
-
-
-      renderTodayExercises();
-
-      updateTodayTotal();
-
-      updatePreviousRecord();
-
-    }
-  );
-
-
-/* =========================
-   初期化
-========================= */
-
-document.getElementById(
-  "trainingDate"
-).value =
-  getToday();
-
-
-renderHistory();
-
-renderTodayExercises();
-
-updateTodayTotal();
-
-</script>
-
-</body>
-</html>
+          <div class="workout-title
