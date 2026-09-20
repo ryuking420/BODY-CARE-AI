@@ -102,6 +102,10 @@
       font-weight: bold;
     }
 
+    /* =========================
+       前回記録
+    ========================= */
+
     .previous-card {
       background: #f0f0f0;
       border-radius: 12px;
@@ -131,6 +135,98 @@
       margin-top: 8px;
       padding-top: 8px;
       border-top: 1px solid #ccc;
+    }
+
+    /* =========================
+       今日のトレーニング
+       一番見やすくする
+    ========================= */
+
+    .today-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      border: 2px solid #111;
+    }
+
+    .today-card-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .today-empty {
+      color: #888;
+      font-size: 16px;
+      padding: 10px 0;
+    }
+
+    .today-exercise {
+      border-top: 1px solid #ddd;
+      padding: 18px 0;
+    }
+
+    .today-exercise:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .today-exercise-name {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .today-exercise-summary {
+      font-size: 16px;
+      font-weight: bold;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    .today-set {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    /* =========================
+       今日の総負荷
+    ========================= */
+
+    .total-card {
+      background: #111;
+      color: white;
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .total-label {
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    .total-number {
+      font-size: 36px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .total-unit {
+      font-size: 18px;
+      font-weight: normal;
+    }
+
+    /* =========================
+       履歴
+    ========================= */
+
+    .history-title {
+      margin-top: 0;
     }
 
     .record {
@@ -198,31 +294,6 @@
       margin-top: 10px;
       line-height: 1.5;
     }
-
-    .total-card {
-      background: #111;
-      color: white;
-      border-radius: 16px;
-      padding: 22px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .total-label {
-      font-size: 16px;
-      color: #ccc;
-    }
-
-    .total-number {
-      font-size: 36px;
-      font-weight: bold;
-      margin-top: 5px;
-    }
-
-    .total-unit {
-      font-size: 18px;
-      font-weight: normal;
-    }
   </style>
 </head>
 
@@ -231,6 +302,10 @@
 <div class="container">
 
   <h1>BODY CARE AI</h1>
+
+  <!-- =========================
+       入力
+  ========================== -->
 
   <div class="card">
 
@@ -375,12 +450,35 @@
   </div>
 
 
-  <!-- 選択日の総負荷 -->
+  <!-- =========================
+       今日のトレーニング
+  ========================== -->
+
+  <div class="today-card">
+
+    <div class="today-card-title">
+      今日のトレーニング
+    </div>
+
+    <div id="todayExercises">
+
+      <div class="today-empty">
+        まだ完了した種目はありません
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       今日の総負荷
+  ========================== -->
 
   <div class="total-card">
 
     <div class="total-label">
-      選択日の総負荷
+      今日の総負荷
     </div>
 
     <div class="total-number">
@@ -398,12 +496,14 @@
   </div>
 
 
-  <!-- トレーニング履歴 -->
+  <!-- =========================
+       過去の履歴
+  ========================== -->
 
   <div class="card">
 
-    <h2>
-      トレーニング履歴
+    <h2 class="history-title">
+      過去のトレーニング履歴
     </h2>
 
     <div id="history">
@@ -461,6 +561,10 @@
     const parts =
       dateString.split("-");
 
+    if (parts.length !== 3) {
+      return dateString;
+    }
+
     return `
       ${parts[0]}年
       ${Number(parts[1])}月
@@ -489,7 +593,14 @@
 
     try {
 
-      return JSON.parse(saved);
+      const data =
+        JSON.parse(saved);
+
+      if (!Array.isArray(data)) {
+        return [];
+      }
+
+      return data;
 
     }
 
@@ -554,8 +665,6 @@
       getHistory();
 
 
-    // 選択日の前だけを見る
-
     const previousDays =
       history
         .filter(
@@ -573,7 +682,7 @@
     ) {
 
       const exercise =
-        day.exercises.find(
+        (day.exercises || []).find(
           item =>
             item.exercise === exerciseName
         );
@@ -672,21 +781,22 @@
     let setsHTML = "";
 
 
-    previous.exercise.sets.forEach(
-      (set, index) => {
+    (previous.exercise.sets || [])
+      .forEach(
+        (set, index) => {
 
-        setsHTML += `
+          setsHTML += `
 
-          <div class="previous-set">
-            セット ${index + 1}：
-            ${set.weight} kg ×
-            ${set.reps} 回
-          </div>
+            <div class="previous-set">
+              セット ${index + 1}：
+              ${set.weight} kg ×
+              ${set.reps} 回
+            </div>
 
-        `;
+          `;
 
-      }
-    );
+        }
+      );
 
 
     area.style.display =
@@ -741,8 +851,8 @@
 
     if (
       !exercise ||
-      !weight ||
-      !reps
+      weight === "" ||
+      reps === ""
     ) {
 
       alert(
@@ -768,21 +878,46 @@
     }
 
 
+    const weightNumber =
+      Number(weight);
+
+    const repsNumber =
+      Number(reps);
+
+
+    if (
+      !Number.isFinite(weightNumber) ||
+      !Number.isFinite(repsNumber) ||
+      weightNumber < 0 ||
+      repsNumber <= 0
+    ) {
+
+      alert(
+        "重量と回数を正しく入力してください"
+      );
+
+      return;
+
+    }
+
+
     currentSets.push({
 
       exercise:
         exercise,
 
       weight:
-        Number(weight),
+        weightNumber,
 
       reps:
-        Number(reps)
+        repsNumber
 
     });
 
 
     renderCurrentSets();
+
+    updateSelectedDateTotal();
 
 
     document.getElementById(
@@ -924,6 +1059,143 @@
 
     updateSelectedDateTotal();
 
+    renderTodayExercises();
+
+  }
+
+
+  // --------------------------------
+  // 今日のトレーニング表示
+  // --------------------------------
+
+  function renderTodayExercises() {
+
+    const area =
+      document.getElementById(
+        "todayExercises"
+      );
+
+
+    if (!area) {
+      return;
+    }
+
+
+    const date =
+      document.getElementById(
+        "trainingDate"
+      ).value;
+
+
+    const history =
+      getHistory();
+
+
+    const savedRecord =
+      history.find(
+        record =>
+          record.date === date
+      );
+
+
+    let exercises = [];
+
+
+    // すでに保存されている今日の記録
+    if (savedRecord) {
+
+      exercises.push(
+        ...(savedRecord.exercises || [])
+      );
+
+    }
+
+
+    // 今回完了した種目
+    exercises.push(
+      ...currentExercises
+    );
+
+
+    if (exercises.length === 0) {
+
+      area.innerHTML = `
+
+        <div class="today-empty">
+          まだ完了した種目はありません
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    let html = "";
+
+
+    exercises.forEach(
+      (exercise) => {
+
+        const load =
+          calculateExerciseLoad(
+            exercise.sets || []
+          );
+
+
+        html += `
+
+          <div class="today-exercise">
+
+            <div class="today-exercise-name">
+              ${exercise.exercise}
+            </div>
+
+            <div class="today-exercise-summary">
+
+              ${exercise.sets.length}セット　
+              総負荷：
+              ${load.toLocaleString()} kg
+
+            </div>
+
+        `;
+
+
+        (exercise.sets || [])
+          .forEach(
+            (set, setIndex) => {
+
+              html += `
+
+                <div class="today-set">
+
+                  セット ${setIndex + 1}：
+                  ${set.weight} kg ×
+                  ${set.reps} 回
+
+                </div>
+
+              `;
+
+            }
+          );
+
+
+        html += `
+
+          </div>
+
+        `;
+
+      }
+    );
+
+
+    area.innerHTML =
+      html;
+
   }
 
 
@@ -979,16 +1251,17 @@
 
     if (sameDay) {
 
-      sameDay.exercises.forEach(
-        exercise => {
+      (sameDay.exercises || [])
+        .forEach(
+          exercise => {
 
-          total +=
-            Number(
-              exercise.totalLoad
-            );
+            total +=
+              Number(
+                exercise.totalLoad
+              );
 
-        }
-      );
+          }
+        );
 
     }
 
@@ -1110,9 +1383,9 @@
 
     updateSelectedDateTotal();
 
+    renderTodayExercises();
 
     renderHistory();
-
 
     updatePreviousRecord();
 
@@ -1184,59 +1457,61 @@
           let dayTotal = 0;
 
 
-          record.exercises.forEach(
-            exercise => {
+          (record.exercises || [])
+            .forEach(
+              exercise => {
 
-              dayTotal +=
-                Number(
-                  exercise.totalLoad
-                );
-
-
-              let setsHTML = "";
+                dayTotal +=
+                  Number(
+                    exercise.totalLoad
+                  );
 
 
-              exercise.sets.forEach(
-                (set, index) => {
-
-                  setsHTML += `
-
-                    セット ${index + 1}：
-                    ${set.weight} kg ×
-                    ${set.reps} 回<br>
-
-                  `;
-
-                }
-              );
+                let setsHTML = "";
 
 
-              exercisesHTML += `
+                (exercise.sets || [])
+                  .forEach(
+                    (set, index) => {
 
-                <div class="exercise">
-                  ${exercise.exercise}
-                </div>
+                      setsHTML += `
 
-                <div class="details">
+                        セット ${index + 1}：
+                        ${set.weight} kg ×
+                        ${set.reps} 回<br>
 
-                  ${setsHTML}
+                      `;
 
-                  <div class="exercise-total">
+                    }
+                  );
 
-                    種目総負荷：
-                    ${Number(
-                      exercise.totalLoad
-                    ).toLocaleString()}
-                    kg
+
+                exercisesHTML += `
+
+                  <div class="exercise">
+                    ${exercise.exercise}
+                  </div>
+
+                  <div class="details">
+
+                    ${setsHTML}
+
+                    <div class="exercise-total">
+
+                      種目総負荷：
+                      ${Number(
+                        exercise.totalLoad
+                      ).toLocaleString()}
+                      kg
+
+                    </div>
 
                   </div>
 
-                </div>
+                `;
 
-              `;
-
-            }
-          );
+              }
+            );
 
 
           item.innerHTML = `
@@ -1291,9 +1566,7 @@
 
 
     if (!ok) {
-
       return;
-
     }
 
 
@@ -1313,9 +1586,9 @@
 
     renderHistory();
 
-
     updateSelectedDateTotal();
 
+    renderTodayExercises();
 
     updatePreviousRecord();
 
@@ -1344,9 +1617,21 @@
       "change",
       function() {
 
+        /*
+         * 日付を変えたら、
+         * 入力中の種目はリセット
+         */
+
+        currentSets = [];
+        currentExercises = [];
+
+        renderCurrentSets();
+
         updateSelectedDateTotal();
 
         updatePreviousRecord();
+
+        renderTodayExercises();
 
       }
     );
@@ -1366,6 +1651,7 @@
 
   updateSelectedDateTotal();
 
+  renderTodayExercises();
 
 </script>
 
