@@ -2,11 +2,10 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BODY CARE AI</title>
 
 <style>
-
 :root{
   --bg:#080b0e;
   --card:#12171c;
@@ -22,146 +21,120 @@
 
 *{
   box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
 }
 
 html{
-  background:var(--bg);
   scroll-behavior:smooth;
 }
 
 body{
   margin:0;
-  min-height:100vh;
   background:
-    radial-gradient(circle at 50% -10%,#1b2831 0,#080b0e 42%);
+    radial-gradient(circle at top,#111820 0%,#080b0e 42%);
   color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  min-height:100vh;
+}
+
+button,
+input,
+select{
+  font-family:inherit;
 }
 
 .container{
-  width:100%;
-  max-width:620px;
-  margin:auto;
-  padding:
-    calc(16px + env(safe-area-inset-top))
-    13px
-    calc(105px + env(safe-area-inset-bottom));
+  max-width:680px;
+  margin:0 auto;
+  padding:22px 16px 110px;
 }
 
-.app-section{
-  scroll-margin-top:20px;
-}
+/* =========================
+   HEADER
+========================= */
 
 .header{
-  padding:9px 5px 25px;
+  text-align:center;
+  padding:10px 0 22px;
 }
 
 .logo{
-  color:var(--green);
-  font-size:13px;
+  font-size:28px;
   font-weight:900;
-  letter-spacing:3px;
+  letter-spacing:1.5px;
 }
 
-.app-title{
-  margin:7px 0 0;
-  font-size:32px;
-  font-weight:900;
-  letter-spacing:-1.2px;
-}
-
-.app-subtitle{
-  margin-top:7px;
-  color:var(--sub);
+.header-title{
+  margin-top:5px;
   font-size:14px;
+  color:var(--sub);
+  letter-spacing:.5px;
 }
+
+/* =========================
+   CARD
+========================= */
 
 .card{
-  background:linear-gradient(
-    145deg,
-    rgba(255,255,255,.055),
-    rgba(255,255,255,.018)
-  );
-  border:1px solid rgba(255,255,255,.07);
+  background:var(--card);
+  border:1px solid var(--line);
   border-radius:18px;
-  padding:19px;
-  margin-bottom:15px;
-  box-shadow:0 14px 35px rgba(0,0,0,.28);
-  backdrop-filter:blur(10px);
+  padding:18px;
+  margin-bottom:16px;
+  box-shadow:0 8px 30px rgba(0,0,0,.22);
 }
 
-.section-heading{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px;
-}
-
-.section-title{
-  margin:0;
-  font-size:19px;
-  font-weight:900;
-}
-
-.section-label{
-  color:#68727c;
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:1px;
+.card-title{
+  font-size:18px;
+  font-weight:800;
+  margin-bottom:16px;
 }
 
 label{
   display:block;
-  margin:17px 0 8px;
   color:var(--sub);
   font-size:13px;
-  font-weight:800;
+  font-weight:700;
+  margin:16px 0 8px;
 }
 
 label:first-child{
   margin-top:0;
 }
 
-select,
-input{
+input,
+select{
   width:100%;
-  height:54px;
-  padding:0 14px;
+  padding:14px;
+  font-size:17px;
   border:1px solid var(--line);
-  border-radius:13px;
+  border-radius:12px;
   background:var(--input);
   color:var(--text);
-  font-size:17px;
-  font-weight:600;
   outline:none;
 }
 
-input::placeholder{
-  color:#505963;
-}
-
-select:focus,
-input:focus{
+input:focus,
+select:focus{
   border-color:var(--green);
-  box-shadow:0 0 0 3px rgba(50,212,127,.11);
+  box-shadow:0 0 0 2px rgba(50,212,127,.12);
 }
 
-select{
-  appearance:none;
-  background-image:
-    linear-gradient(45deg,transparent 50%,#87919b 50%),
-    linear-gradient(135deg,#87919b 50%,transparent 50%);
-  background-position:
-    calc(100% - 20px) 23px,
-    calc(100% - 14px) 23px;
-  background-size:6px 6px;
-  background-repeat:no-repeat;
+input::placeholder{
+  color:var(--muted);
 }
 
+select option{
+  background:#11161b;
+  color:#fff;
+}
 
 /* =========================
-   重量・回数
+   INPUT ROW
 ========================= */
 
 .input-row{
@@ -170,25 +143,9 @@ select{
   gap:10px;
 }
 
-.input-unit{
-  position:relative;
+.input-group label{
+  margin-top:0;
 }
-
-.input-unit input{
-  padding-right:45px;
-}
-
-.input-unit span{
-  position:absolute;
-  right:14px;
-  top:50%;
-  transform:translateY(-50%);
-  color:#626c76;
-  font-size:13px;
-  font-weight:800;
-  pointer-events:none;
-}
-
 
 /* =========================
    BUTTON
@@ -196,14 +153,14 @@ select{
 
 button{
   width:100%;
-  min-height:53px;
-  margin-top:14px;
   border:0;
-  border-radius:13px;
-  color:#fff;
-  background:#252c33;
+  border-radius:12px;
+  padding:14px;
+  margin-top:12px;
+  background:var(--green);
+  color:#06120b;
   font-size:16px;
-  font-weight:800;
+  font-weight:900;
   cursor:pointer;
 }
 
@@ -211,567 +168,387 @@ button:active{
   transform:scale(.98);
 }
 
-button:disabled{
-  opacity:.38;
-}
-
-#addSetButton{
-  background:linear-gradient(
-    135deg,
-    var(--green),
-    var(--green-dark)
-  );
-  color:#04140b;
-  box-shadow:0 8px 20px rgba(50,212,127,.14);
+button:hover{
+  background:var(--green-dark);
 }
 
 .complete-button{
+  background:#20282e;
+  color:var(--text);
+  border:1px solid var(--line);
   margin-top:18px;
-  background:#252b31;
-  border:1px solid #343d46;
 }
 
+.complete-button:hover{
+  background:#293239;
+}
+
+.save-button{
+  margin-top:18px;
+}
+
+.delete-button{
+  background:var(--red);
+  color:#fff;
+}
+
+.delete-button:hover{
+  background:#e84444;
+}
 
 /* =========================
-   入力中セット
+   CURRENT SETS
 ========================= */
 
 .set-list{
-  margin-top:19px;
-}
-
-.set-list-title{
-  color:#737d87;
-  font-size:12px;
-  font-weight:800;
-  margin-bottom:7px;
+  margin-top:16px;
 }
 
 .set-item{
   display:grid;
-  grid-template-columns:64px 1fr 72px;
+  grid-template-columns:60px 1fr 60px;
   align-items:center;
   gap:8px;
-  min-height:55px;
   border-top:1px solid var(--line);
+  padding:12px 0;
+  font-size:15px;
 }
 
 .set-number{
   color:var(--green);
-  font-size:13px;
   font-weight:900;
 }
 
 .set-value{
-  color:#edf0f2;
-  font-size:16px;
-  font-weight:700;
+  color:var(--text);
 }
 
 .set-delete{
-  width:72px!important;
-  min-width:72px!important;
-  height:39px!important;
-  min-height:39px!important;
-  margin:0!important;
-  padding:0!important;
-  border-radius:9px!important;
-  background:rgba(255,85,85,.11)!important;
-  border:1px solid rgba(255,85,85,.3)!important;
-  color:#ff6767!important;
-  font-size:12px!important;
+  width:60px !important;
+  min-width:60px !important;
+  margin:0 !important;
+  padding:8px 5px !important;
+  background:rgba(255,85,85,.14) !important;
+  border:1px solid rgba(255,85,85,.35) !important;
+  color:var(--red) !important;
+  font-size:12px !important;
 }
 
-.empty-sets{
-  padding:9px 0;
-  color:var(--muted);
-  font-size:13px;
+.set-delete:hover{
+  background:rgba(255,85,85,.25) !important;
 }
-
 
 /* =========================
-   ★ 前回記録
-   入力エリアの下
+   PREVIOUS
 ========================= */
 
 .previous-card{
-  margin-top:20px;
-  padding:16px;
+  background:#0d1318;
+  border:1px solid var(--line);
   border-radius:14px;
-  background:#0d1216;
-  border:1px solid #252d35;
+  padding:14px;
+  margin-top:16px;
 }
 
 .previous-title{
-  color:var(--green);
-  font-size:14px;
+  font-size:16px;
   font-weight:900;
-  margin-bottom:6px;
+  color:var(--green);
+  margin-bottom:7px;
 }
 
 .previous-date{
   color:var(--sub);
   font-size:13px;
-  margin-bottom:12px;
+  margin-bottom:9px;
 }
 
 .previous-set{
-  color:#dce1e5;
-  font-size:15px;
-  line-height:1.7;
+  color:var(--text);
+  font-size:14px;
+  line-height:1.8;
 }
 
 .previous-total{
-  margin-top:11px;
-  padding-top:11px;
-  border-top:1px solid var(--line);
-  color:#fff;
-  font-size:14px;
   font-weight:800;
+  margin-top:8px;
+  padding-top:9px;
+  border-top:1px solid var(--line);
 }
 
 .one-rm{
-  color:#69737d;
-  font-size:12px;
-  line-height:1.6;
+  color:var(--sub);
+  font-size:13px;
+  line-height:1.7;
 }
 
 .one-rm-best{
-  margin-top:9px;
-  padding-top:9px;
-  border-top:1px solid var(--line);
   color:var(--green);
-  font-size:14px;
-  font-weight:900;
+  font-weight:800;
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px solid var(--line);
 }
 
-
 /* =========================
-   今日
+   TODAY
 ========================= */
 
 .today-card{
-  position:relative;
-  overflow:hidden;
-  background:linear-gradient(145deg,#171e24,#101419);
-  border:1px solid #303942;
-  border-radius:21px;
-  padding:20px;
-  margin-bottom:15px;
-  box-shadow:0 17px 42px rgba(0,0,0,.35);
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:16px;
 }
 
-.today-card:before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:20px;
-  width:3px;
-  height:42px;
-  background:var(--green);
-  border-radius:0 4px 4px 0;
-}
-
-.today-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  margin-bottom:21px;
-}
-
-.today-heading{
-  font-size:21px;
+.today-title{
+  font-size:20px;
   font-weight:900;
-}
-
-.today-date{
-  color:#69737d;
-  font-size:11px;
-  font-weight:800;
+  margin-bottom:16px;
 }
 
 .today-empty{
   color:var(--muted);
-  font-size:14px;
-  padding:10px 0;
+  text-align:center;
+  padding:20px 0;
 }
 
 .today-exercise{
-  padding:18px 0;
   border-top:1px solid var(--line);
+  padding:16px 0;
 }
 
 .today-exercise:first-child{
-  padding-top:0;
   border-top:0;
-}
-
-.exercise-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:13px;
+  padding-top:0;
 }
 
 .today-exercise-name{
-  font-size:20px;
+  font-size:19px;
   font-weight:900;
+  margin-bottom:5px;
 }
 
 .today-exercise-summary{
-  color:var(--green);
-  font-size:11px;
-  font-weight:900;
+  color:var(--sub);
+  font-size:13px;
+  margin-bottom:8px;
 }
 
-.set-strip{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:6px;
-  margin-bottom:14px;
+.today-set{
+  color:#d9dee3;
+  font-size:14px;
+  line-height:1.8;
 }
 
-.set-chip{
-  padding:9px 5px;
-  border-radius:9px;
-  background:#0c1115;
-  border:1px solid #242c33;
-  text-align:center;
-}
-
-.set-chip-label{
-  color:#626d77;
-  font-size:9px;
+.today-exercise-total{
+  font-size:14px;
   font-weight:800;
-}
-
-.set-chip-value{
-  color:#dfe4e8;
-  font-size:12px;
-  font-weight:800;
-  white-space:nowrap;
-}
-
-.exercise-stats{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-
-.stat-box{
-  padding:12px;
-  border-radius:11px;
-  background:#0d1216;
-  border:1px solid #252d35;
-}
-
-.stat-label{
-  color:#68727c;
-  font-size:10px;
-  font-weight:800;
-}
-
-.stat-value{
-  margin-top:3px;
-  color:#fff;
-  font-size:18px;
-  font-weight:900;
-}
-
-.stat-value.green{
-  color:var(--green);
+  margin-top:9px;
+  padding-top:9px;
+  border-top:1px solid var(--line);
 }
 
 .comparison-box{
-  margin-top:10px;
+  background:#0b1115;
+  border:1px solid var(--line);
+  border-radius:12px;
   padding:12px;
-  border-radius:11px;
-  background:#0b1014;
-  border:1px solid #242c33;
+  margin-top:12px;
 }
 
 .comparison-title{
-  margin-bottom:5px;
-  color:#e7eaed;
-  font-size:11px;
+  color:var(--green);
   font-weight:900;
+  margin-bottom:6px;
 }
 
 .comparison-line{
-  color:#7f8993;
-  font-size:12px;
-  line-height:1.7;
+  color:var(--sub);
+  font-size:13px;
+  line-height:1.8;
 }
 
 .comparison-up{
-  color:var(--green)!important;
+  color:var(--green);
   font-weight:900;
 }
 
 .comparison-down{
-  color:#ff6666!important;
+  color:var(--red);
   font-weight:900;
 }
 
+.comparison-same{
+  color:var(--sub);
+  font-weight:900;
+}
 
 /* =========================
-   総負荷
+   TOTAL
 ========================= */
 
 .total-card{
-  padding:21px;
-  margin-bottom:15px;
-  border-radius:20px;
-  background:linear-gradient(135deg,#14241b,#0d1511);
-  border:1px solid rgba(50,212,127,.24);
+  background:
+    linear-gradient(145deg,#17231d,#101713);
+  border:1px solid rgba(50,212,127,.25);
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:16px;
   text-align:center;
 }
 
 .total-label{
-  color:#71877a;
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:1.5px;
+  color:var(--sub);
+  font-size:13px;
 }
 
 .total-number{
-  margin-top:4px;
-  color:#fff;
-  font-size:40px;
+  color:var(--green);
+  font-size:38px;
   font-weight:900;
+  margin-top:3px;
 }
 
 .total-unit{
-  color:#799084;
-  font-size:15px;
+  color:var(--sub);
+  font-size:16px;
+  font-weight:700;
 }
 
-
 /* =========================
-   履歴
+   HISTORY
 ========================= */
 
 .record{
-  padding:21px 0;
   border-top:1px solid var(--line);
+  padding:18px 0;
 }
 
 .record:first-child{
   border-top:0;
-}
-
-.history-date{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  padding-top:0;
 }
 
 .date-title{
-  font-size:20px;
+  font-size:19px;
   font-weight:900;
-}
-
-.history-label{
-  color:#69737d;
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:1px;
+  margin-bottom:8px;
 }
 
 .workout-title{
-  color:#626d77;
-  font-size:11px;
-  font-weight:800;
-  margin:5px 0 15px;
-}
-
-.history-exercise{
-  padding:15px 0;
-  border-top:1px solid #242c33;
-}
-
-.history-exercise-name{
-  font-size:17px;
+  color:var(--green);
+  font-size:13px;
   font-weight:900;
   margin-bottom:10px;
 }
 
-.history-set-row{
-  color:#aeb6be;
-  font-size:13px;
+.exercise{
+  font-size:17px;
+  font-weight:900;
+  margin-top:16px;
+  margin-bottom:7px;
+}
+
+.details{
+  color:var(--sub);
+  font-size:14px;
   line-height:1.8;
 }
 
-.history-stats{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
-  margin-top:10px;
-}
-
-.history-stat{
-  padding:10px;
-  border-radius:9px;
-  background:#0d1216;
-  border:1px solid #222a31;
-}
-
-.history-stat-label{
-  color:#65707a;
-  font-size:9px;
+.exercise-total{
+  color:var(--text);
   font-weight:800;
-}
-
-.history-stat-value{
-  margin-top:3px;
-  color:#fff;
-  font-size:14px;
-  font-weight:900;
-}
-
-.history-stat-value.green{
-  color:var(--green);
+  margin-top:4px;
 }
 
 .day-total{
-  margin-top:18px;
-  padding-top:15px;
-  border-top:1px solid var(--line);
-  display:flex;
-  justify-content:space-between;
-}
-
-.day-total-label{
-  color:#737d86;
-  font-size:11px;
-  font-weight:800;
-}
-
-.day-total-value{
   color:var(--green);
   font-size:17px;
   font-weight:900;
+  margin-top:17px;
+  padding-top:13px;
+  border-top:1px solid var(--line);
 }
 
-.delete-button{
-  margin-top:14px;
-  min-height:43px;
-  background:rgba(255,85,85,.08);
-  border:1px solid rgba(255,85,85,.25);
-  color:#ff6666;
-  font-size:12px;
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:22px 0;
 }
-
 
 /* =========================
-   AI
+   ROADMAP
 ========================= */
 
-.analysis-card{
-  background:linear-gradient(145deg,#151c22,#101419);
-  border:1px solid #2c353e;
-  border-radius:20px;
-  padding:22px;
-  margin-bottom:15px;
-}
-
-.analysis-icon{
-  width:48px;
-  height:48px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.roadmap{
+  background:#0d1318;
+  border:1px solid var(--line);
   border-radius:14px;
-  background:rgba(50,212,127,.1);
-  color:var(--green);
-  font-size:22px;
-  font-weight:900;
+  padding:15px;
+  margin-top:16px;
 }
 
-.analysis-title{
-  margin:14px 0 7px;
-  font-size:21px;
-  font-weight:900;
-}
-
-.analysis-text{
-  color:#7f8993;
+.roadmap-title{
   font-size:14px;
+  font-weight:900;
+  color:var(--green);
+  margin-bottom:8px;
+}
+
+.roadmap-item{
+  color:var(--sub);
+  font-size:12px;
   line-height:1.8;
 }
 
-.analysis-roadmap{
-  margin-top:17px;
-  padding-top:15px;
-  border-top:1px solid var(--line);
-  color:#adb5bd;
-  font-size:13px;
-  line-height:2;
-}
-
-.analysis-roadmap span{
-  color:var(--green);
-  font-weight:800;
-}
-
-
 /* =========================
-   下部ナビ
+   BOTTOM NAV
 ========================= */
 
 .bottom-nav{
   position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index:1000;
-  padding:
-    8px
-    12px
-    calc(8px + env(safe-area-inset-bottom));
-  background:rgba(8,11,14,.88);
-  border-top:1px solid rgba(255,255,255,.08);
-  backdrop-filter:blur(20px);
-}
-
-.bottom-nav-inner{
-  max-width:620px;
-  margin:auto;
+  left:50%;
+  bottom:12px;
+  transform:translateX(-50%);
+  width:min(650px,calc(100% - 24px));
+  background:rgba(18,23,28,.94);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:7px;
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:5px;
-  padding:5px;
-  border-radius:16px;
-  background:rgba(18,23,28,.95);
-  border:1px solid #242c33;
+  z-index:100;
+  box-shadow:0 12px 35px rgba(0,0,0,.45);
 }
 
 .nav-button{
-  min-height:55px;
   margin:0;
-  padding:5px 2px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:3px;
-  border-radius:12px;
+  padding:9px 5px;
   background:transparent;
-  color:#68727c;
-  font-size:10px;
+  color:var(--muted);
+  font-size:12px;
   font-weight:800;
 }
 
-.nav-icon{
-  font-size:18px;
-}
-
 .nav-button.active{
+  background:rgba(50,212,127,.12);
   color:var(--green);
-  background:rgba(50,212,127,.09);
 }
 
-@media(max-width:420px){
+.section{
+  scroll-margin-top:15px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:430px){
 
   .container{
     padding-left:12px;
@@ -779,402 +556,325 @@ button:disabled{
   }
 
   .card,
-  .today-card,
-  .analysis-card{
-    padding:17px;
+  .today-card{
+    padding:15px;
   }
 
-  .app-title{
-    font-size:29px;
+  .input-row{
+    gap:8px;
   }
 
+  input,
+  select{
+    padding:13px 11px;
+    font-size:16px;
+  }
+
+  .set-item{
+    grid-template-columns:52px 1fr 58px;
+  }
+
+  .total-number{
+    font-size:34px;
+  }
 }
-
 </style>
 </head>
-
 
 <body>
 
 <div class="container">
 
+  <!-- =========================
+       HEADER
+  ========================== -->
 
-<header class="header">
-
-  <div class="logo">
-    BODY CARE AI
-  </div>
-
-  <h1 class="app-title">
-    Training Log
-  </h1>
-
-  <div class="app-subtitle">
-    今日の身体を、未来の能力へ。
-  </div>
-
-</header>
-
-
-<!-- =====================================================
-     記録画面
-===================================================== -->
-
-<section id="recordSection" class="app-section">
-
-<div class="card">
-
-  <div class="section-heading">
-
-    <h2 class="section-title">
-      トレーニング記録
-    </h2>
-
-    <div class="section-label">
-      WORKOUT
+  <header class="header">
+    <div class="logo">BODY CARE AI</div>
+    <div class="header-title">
+      Training Log
     </div>
-
-  </div>
-
-
-  <label for="trainingDate">
-    トレーニング日
-  </label>
-
-  <input
-    type="date"
-    id="trainingDate"
-  >
+    <div class="header-title">
+      今日の身体を、未来の能力へ。
+    </div>
+  </header>
 
 
   <!-- =========================
-       種目
-  ========================= -->
+       記録
+  ========================== -->
 
-  <label for="exercise">
-    種目
-  </label>
+  <section id="recordSection" class="section">
 
-  <select id="exercise">
+    <div class="card">
 
-    <option value="">
-      種目を選択してください
-    </option>
+      <div class="card-title">
+        トレーニングを記録
+      </div>
 
-    <option value="ベンチプレス">
-      ベンチプレス
-    </option>
-
-    <option value="スクワット">
-      スクワット
-    </option>
-
-    <option value="デッドリフト">
-      デッドリフト
-    </option>
-
-    <option value="RDL">
-      RDL
-    </option>
-
-    <option value="ラットプルダウン">
-      ラットプルダウン
-    </option>
-
-    <option value="懸垂">
-      懸垂
-    </option>
-
-    <option value="レッグプレス">
-      レッグプレス
-    </option>
-
-    <option value="ショルダープレス">
-      ショルダープレス
-    </option>
-
-    <option value="サイドレイズ">
-      サイドレイズ
-    </option>
-
-    <option value="ペックフライ">
-      ペックフライ
-    </option>
-
-    <option value="フェイスプル">
-      フェイスプル
-    </option>
-
-  </select>
-
-
-  <!-- =================================================
-       ★★★ ここが今回の重要部分 ★★★
-       
-       種目
-       ↓
-       重量・回数
-       ↓
-       セット追加
-       ↓
-       入力中セット
-       ↓
-       種目完了
-       ↓
-       前回記録
-  ================================================= -->
-
-
-  <!-- =========================
-       重量・回数
-  ========================= -->
-
-  <div class="input-row">
-
-    <div>
-
-      <label for="weight">
-        重量
+      <label for="trainingDate">
+        トレーニング日
       </label>
 
-      <div class="input-unit">
+      <input
+        type="date"
+        id="trainingDate"
+      >
 
-        <input
-          type="number"
-          id="weight"
-          placeholder="70"
-          inputmode="decimal"
-          step="0.5"
-        >
 
-        <span>kg</span>
+      <label for="exercise">
+        種目
+      </label>
+
+      <select id="exercise">
+
+        <option value="">
+          種目を選択してください
+        </option>
+
+        <option value="ベンチプレス">
+          ベンチプレス
+        </option>
+
+        <option value="スクワット">
+          スクワット
+        </option>
+
+        <option value="デッドリフト">
+          デッドリフト
+        </option>
+
+        <option value="RDL">
+          RDL
+        </option>
+
+        <option value="ラットプルダウン">
+          ラットプルダウン
+        </option>
+
+        <option value="懸垂">
+          懸垂
+        </option>
+
+        <option value="レッグプレス">
+          レッグプレス
+        </option>
+
+        <option value="ショルダープレス">
+          ショルダープレス
+        </option>
+
+        <option value="サイドレイズ">
+          サイドレイズ
+        </option>
+
+        <option value="ペックフライ">
+          ペックフライ
+        </option>
+
+        <option value="フェイスプル">
+          フェイスプル
+        </option>
+
+      </select>
+
+
+      <!-- 前回記録 -->
+
+      <div
+        id="previousRecord"
+        class="previous-card"
+        style="display:none"
+      ></div>
+
+
+      <!-- 重量・回数 -->
+
+      <div class="input-row">
+
+        <div class="input-group">
+
+          <label for="weight">
+            重量（kg）
+          </label>
+
+          <input
+            type="number"
+            id="weight"
+            placeholder="70"
+            inputmode="decimal"
+            step="0.5"
+            autocomplete="off"
+          >
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label for="reps">
+            回数
+          </label>
+
+          <input
+            type="number"
+            id="reps"
+            placeholder="8"
+            inputmode="numeric"
+            autocomplete="off"
+          >
+
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        onclick="addSet()"
+      >
+        セットを追加
+      </button>
+
+
+      <!-- 現在入力中 -->
+
+      <div
+        class="set-list"
+        id="currentSets"
+      ></div>
+
+
+      <button
+        type="button"
+        class="complete-button"
+        onclick="completeExercise()"
+      >
+        この種目を完了
+      </button>
+
+
+      <div class="roadmap">
+
+        <div class="roadmap-title">
+          BODY CARE AI
+        </div>
+
+        <div class="roadmap-item">
+          現在：トレーニング記録
+        </div>
+
+        <div class="roadmap-item">
+          次：今日の状態 → 過去比較 → 自己ベスト → 分析
+        </div>
+
+        <div class="roadmap-item">
+          最終：身体・食事・睡眠・活動量を統合したAI判断
+        </div>
 
       </div>
 
     </div>
 
+  </section>
 
-    <div>
 
-      <label for="reps">
-        回数
-      </label>
+  <!-- =========================
+       今日
+  ========================== -->
 
-      <div class="input-unit">
+  <section id="todaySection" class="section">
 
-        <input
-          type="number"
-          id="reps"
-          placeholder="10"
-          inputmode="numeric"
-        >
+    <div class="today-card">
 
-        <span>回</span>
+      <div
+        class="today-title"
+        id="todayTitle"
+      >
+        今日のトレーニング
+      </div>
+
+      <div id="todayExercises">
+
+        <div class="today-empty">
+          まだ完了した種目はありません
+        </div>
+
+      </div>
+
+      <button
+        type="button"
+        class="save-button"
+        onclick="saveTodayWorkout()"
+      >
+        この日のトレーニングを保存
+      </button>
+
+    </div>
+
+
+    <div class="total-card">
+
+      <div class="total-label">
+        今日の総負荷
+      </div>
+
+      <div class="total-number">
+
+        <span id="todayTotalLoad">
+          0
+        </span>
+
+        <span class="total-unit">
+          kg
+        </span>
 
       </div>
 
     </div>
 
-  </div>
+  </section>
 
 
   <!-- =========================
-       セット追加
-  ========================= -->
+       履歴
+  ========================== -->
 
-  <button
-    type="button"
-    id="addSetButton"
-  >
-    ＋ セットを追加
-  </button>
+  <section id="historySection" class="section">
 
+    <div class="card">
 
-  <!-- =========================
-       入力中セット
-  ========================= -->
+      <div class="card-title">
+        トレーニング履歴
+      </div>
 
-  <div
-    class="set-list"
-    id="currentSets"
-  ></div>
+      <div id="history">
 
+        <div class="empty">
+          まだ記録がありません
+        </div>
 
-  <!-- =========================
-       種目完了
-  ========================= -->
+      </div>
 
-  <button
-    type="button"
-    class="complete-button"
-    id="completeExerciseButton"
-  >
-    この種目を完了
-  </button>
-
-
-  <!-- =========================
-       ★ 前回記録
-       必ず入力欄の「下」
-  ========================= -->
-
-  <div
-    id="previousRecord"
-    class="previous-card"
-    style="display:none"
-  ></div>
-
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     今日
-===================================================== -->
-
-<section id="todaySection" class="app-section">
-
-<div class="today-card">
-
-  <div class="today-header">
-
-    <div class="today-heading">
-      今日のトレーニング
     </div>
 
-    <div
-      class="today-date"
-      id="todayDateLabel"
-    ></div>
-
-  </div>
-
-
-  <div id="todayExercises">
-
-    <div class="today-empty">
-      まだ完了した種目はありません
-    </div>
-
-  </div>
-
-
-  <button
-    type="button"
-    id="saveTodayButton"
-  >
-    この日のトレーニングを保存
-  </button>
+  </section>
 
 </div>
 
 
-<div class="total-card">
-
-  <div class="total-label">
-    TODAY'S TOTAL LOAD
-  </div>
-
-  <div class="total-number">
-
-    <span id="todayTotalLoad">
-      0
-    </span>
-
-    <span class="total-unit">
-      kg
-    </span>
-
-  </div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     履歴
-===================================================== -->
-
-<section id="historySection" class="app-section">
-
-<div class="card">
-
-  <div class="section-heading">
-
-    <h2 class="section-title">
-      トレーニング履歴
-    </h2>
-
-    <div class="section-label">
-      HISTORY
-    </div>
-
-  </div>
-
-  <div id="history"></div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     AI
-===================================================== -->
-
-<section id="analysisSection" class="app-section">
-
-<div class="analysis-card">
-
-  <div class="analysis-icon">
-    AI
-  </div>
-
-  <div class="analysis-title">
-    BODY CARE AI
-  </div>
-
-  <div class="analysis-text">
-    あなたの身体とトレーニングを理解し、
-    未来の能力から逆算した提案を行う。
-  </div>
-
-  <div class="analysis-roadmap">
-
-    <div><span>01</span> トレーニング分析</div>
-    <div><span>02</span> 筋力・推定1RMの推移</div>
-    <div><span>03</span> 疲労・回復状態</div>
-    <div><span>04</span> 食事・活動量</div>
-    <div><span>05</span> 睡眠・体重・身体組成</div>
-    <div><span>06</span> BODY CARE AIによる総合判断</div>
-
-  </div>
-
-</div>
-
-</section>
-
-</div>
-
-
-<!-- =====================================================
-     下部ナビ
-===================================================== -->
+<!-- =========================
+     BOTTOM NAV
+========================= -->
 
 <nav class="bottom-nav">
-
-<div class="bottom-nav-inner">
 
   <button
     type="button"
     class="nav-button active"
     data-target="recordSection"
   >
-    <div class="nav-icon">＋</div>
-    <div>記録</div>
+    記録
   </button>
 
   <button
@@ -1182,8 +882,7 @@ button:disabled{
     class="nav-button"
     data-target="todaySection"
   >
-    <div class="nav-icon">◉</div>
-    <div>今日</div>
+    今日
   </button>
 
   <button
@@ -1191,8 +890,7 @@ button:disabled{
     class="nav-button"
     data-target="historySection"
   >
-    <div class="nav-icon">≡</div>
-    <div>履歴</div>
+    履歴
   </button>
 
   <button
@@ -1200,28 +898,51 @@ button:disabled{
     class="nav-button"
     data-target="analysisSection"
   >
-    <div class="nav-icon">AI</div>
-    <div>分析</div>
+    分析
   </button>
-
-</div>
 
 </nav>
 
 
 <script>
 
-/* =========================================================
-   DATA
-========================================================= */
+/* ==================================================
+   BODY CARE AI
+   STEP 5
+   入力速度改善版
+
+   ・トレーニング日
+   ・複数種目
+   ・複数セット
+   ・セット削除
+   ・前回記録
+   ・推定1RM
+   ・今日の総負荷
+   ・履歴
+   ・入力速度改善
+================================================== */
+
+
+/* =========================
+   状態
+========================= */
 
 let currentSets = [];
+
 let currentExercises = [];
 
 
-/* =========================================================
-   DATE
-========================================================= */
+/* =========================
+   保存先
+========================= */
+
+const STORAGE_KEY =
+  "trainingHistory";
+
+
+/* =========================
+   今日の日付
+========================= */
 
 function getToday(){
 
@@ -1237,6 +958,10 @@ function getToday(){
 
 }
 
+
+/* =========================
+   日付表示
+========================= */
 
 function formatDate(dateString){
 
@@ -1259,15 +984,15 @@ function formatDate(dateString){
 }
 
 
-/* =========================================================
-   STORAGE
-========================================================= */
+/* =========================
+   履歴取得
+========================= */
 
 function getHistory(){
 
   const saved =
     localStorage.getItem(
-      "trainingHistory"
+      STORAGE_KEY
     );
 
   if(!saved){
@@ -1283,7 +1008,7 @@ function getHistory(){
       ? data
       : [];
 
-  }catch(e){
+  }catch(error){
 
     return [];
 
@@ -1292,67 +1017,90 @@ function getHistory(){
 }
 
 
+/* =========================
+   履歴保存
+========================= */
+
 function saveHistory(history){
 
   localStorage.setItem(
-    "trainingHistory",
+    STORAGE_KEY,
     JSON.stringify(history)
   );
 
 }
 
 
-/* =========================================================
-   LOAD
-========================================================= */
+/* =========================
+   総負荷
+========================= */
 
 function calculateExerciseLoad(sets){
 
-  return (
-    sets || []
-  ).reduce(
-    (total,set) =>
-      total +
-      Number(set.weight || 0) *
-      Number(set.reps || 0),
+  return (sets || []).reduce(
+    (total,set)=>{
+
+      return (
+        total +
+        Number(set.weight || 0) *
+        Number(set.reps || 0)
+      );
+
+    },
     0
   );
 
 }
 
 
-/* =========================================================
-   ESTIMATED 1RM
-========================================================= */
+/* =========================
+   推定1RM
+   Epley式
+========================= */
 
 function calculateEstimated1RM(
   weight,
   reps
 ){
 
-  weight = Number(weight || 0);
-  reps = Number(reps || 0);
+  weight =
+    Number(weight || 0);
+
+  reps =
+    Number(reps || 0);
 
   if(
     weight <= 0 ||
     reps <= 0
   ){
+
     return 0;
+
   }
 
-  return weight *
-    (1 + reps / 30);
+  return (
+    weight *
+    (1 + reps / 30)
+  );
 
 }
 
 
-function getBestEstimated1RM(sets){
+/* =========================
+   種目内の最高推定1RM
+========================= */
+
+function getBestEstimated1RM(
+  sets
+){
 
   if(
     !sets ||
     sets.length === 0
   ){
+
     return 0;
+
   }
 
   return Math.max(
@@ -1368,9 +1116,9 @@ function getBestEstimated1RM(sets){
 }
 
 
-/* =========================================================
-   PREVIOUS RECORD
-========================================================= */
+/* =========================
+   前回記録検索
+========================= */
 
 function findPreviousRecord(
   exerciseName,
@@ -1384,27 +1132,28 @@ function findPreviousRecord(
     history
       .filter(
         record =>
-          record.date < selectedDate
+          record.date <
+          selectedDate
       )
       .sort(
-        (a,b) =>
+        (a,b)=>
           b.date.localeCompare(
             a.date
           )
       );
 
   for(
-    const day of previousDays
+    const day
+    of previousDays
   ){
 
     const exercise =
-      (
-        day.exercises || []
-      ).find(
-        item =>
-          item.exercise ===
-          exerciseName
-      );
+      (day.exercises || [])
+        .find(
+          item =>
+            item.exercise ===
+            exerciseName
+        );
 
     if(exercise){
 
@@ -1422,29 +1171,27 @@ function findPreviousRecord(
 }
 
 
-/* =========================================================
+/* =========================
    前回記録表示
-========================================================= */
+========================= */
 
 function updatePreviousRecord(){
 
   const exerciseName =
-    document.getElementById(
-      "exercise"
-    ).value;
+    document
+      .getElementById("exercise")
+      .value;
 
   const selectedDate =
-    document.getElementById(
-      "trainingDate"
-    ).value;
+    document
+      .getElementById("trainingDate")
+      .value;
 
   const area =
-    document.getElementById(
-      "previousRecord"
-    );
-
-
-  area.innerHTML = "";
+    document
+      .getElementById(
+        "previousRecord"
+      );
 
 
   if(
@@ -1454,6 +1201,9 @@ function updatePreviousRecord(){
 
     area.style.display =
       "none";
+
+    area.innerHTML =
+      "";
 
     return;
 
@@ -1474,16 +1224,13 @@ function updatePreviousRecord(){
   if(!previous){
 
     area.innerHTML = `
-
       <div class="previous-title">
         前回の記録
       </div>
 
       <div class="previous-date">
-        ${exerciseName}
-        の前回の記録はありません
+        ${exerciseName}の前回記録はありません
       </div>
-
     `;
 
     return;
@@ -1494,36 +1241,39 @@ function updatePreviousRecord(){
   let setsHTML = "";
 
 
-  (
-    previous.exercise.sets || []
-  ).forEach(
-    (set,index) => {
+  (previous.exercise.sets || [])
+    .forEach(
+      (set,index)=>{
 
-      setsHTML += `
+        setsHTML += `
+          <div class="previous-set">
+            セット ${index+1}：
+            ${set.weight} kg ×
+            ${set.reps} 回
+          </div>
 
-        <div class="previous-set">
-          セット ${index + 1}：
-          ${set.weight} kg ×
-          ${set.reps} 回
-        </div>
+          <div class="one-rm">
+            推定1RM：約
+            ${calculateEstimated1RM(
+              set.weight,
+              set.reps
+            ).toFixed(1)}
+            kg
+          </div>
+        `;
 
-        <div class="one-rm">
-          推定1RM：約
-          ${calculateEstimated1RM(
-            set.weight,
-            set.reps
-          ).toFixed(1)}
-          kg
-        </div>
-
-      `;
-
-    }
-  );
+      }
+    );
 
 
   const previousLoad =
     calculateExerciseLoad(
+      previous.exercise.sets || []
+    );
+
+
+  const previous1RM =
+    getBestEstimated1RM(
       previous.exercise.sets || []
     );
 
@@ -1548,9 +1298,7 @@ function updatePreviousRecord(){
 
     <div class="one-rm-best">
       前回の推定1RM：
-      ${getBestEstimated1RM(
-        previous.exercise.sets || []
-      ).toFixed(1)}
+      ${previous1RM.toFixed(1)}
       kg
     </div>
 
@@ -1559,26 +1307,70 @@ function updatePreviousRecord(){
 }
 
 
-/* =========================================================
-   ADD SET
-========================================================= */
+/* =========================
+   今日の種目取得
+========================= */
+
+function getTodayExercises(){
+
+  const date =
+    document
+      .getElementById(
+        "trainingDate"
+      )
+      .value;
+
+  const history =
+    getHistory();
+
+  const savedRecord =
+    history.find(
+      record =>
+        record.date === date
+    );
+
+  const savedExercises =
+    savedRecord
+      ? (
+        savedRecord.exercises ||
+        []
+      )
+      : [];
+
+  return [
+    ...savedExercises,
+    ...currentExercises
+  ];
+
+}
+
+
+/* =========================
+   セット追加
+========================= */
 
 function addSet(){
 
   const exercise =
-    document.getElementById(
-      "exercise"
-    ).value;
+    document
+      .getElementById(
+        "exercise"
+      )
+      .value;
 
   const weight =
-    document.getElementById(
-      "weight"
-    ).value;
+    document
+      .getElementById(
+        "weight"
+      )
+      .value;
 
   const reps =
-    document.getElementById(
-      "reps"
-    ).value;
+    document
+      .getElementById(
+        "reps"
+      )
+      .value;
 
 
   if(
@@ -1619,8 +1411,12 @@ function addSet(){
 
 
   if(
-    !Number.isFinite(weightNumber) ||
-    !Number.isFinite(repsNumber) ||
+    !Number.isFinite(
+      weightNumber
+    ) ||
+    !Number.isFinite(
+      repsNumber
+    ) ||
     weightNumber < 0 ||
     repsNumber <= 0
   ){
@@ -1636,11 +1432,14 @@ function addSet(){
 
   currentSets.push({
 
-    exercise:exercise,
+    exercise:
+      exercise,
 
-    weight:weightNumber,
+    weight:
+      weightNumber,
 
-    reps:repsNumber
+    reps:
+      repsNumber
 
   });
 
@@ -1650,25 +1449,28 @@ function addSet(){
   updateTodayTotal();
 
 
-  document.getElementById(
-    "weight"
-  ).value = "";
+  document
+    .getElementById("weight")
+    .value = "";
 
-  document.getElementById(
-    "reps"
-  ).value = "";
+  document
+    .getElementById("reps")
+    .value = "";
 
 
-  document.getElementById(
-    "weight"
-  ).focus();
+  /* STEP 5
+     次のセットをすぐ入力できる */
+
+  document
+    .getElementById("weight")
+    .focus();
 
 }
 
 
-/* =========================================================
-   DELETE SET
-========================================================= */
+/* =========================
+   セット削除
+========================= */
 
 function deleteCurrentSet(index){
 
@@ -1676,7 +1478,9 @@ function deleteCurrentSet(index){
     index < 0 ||
     index >= currentSets.length
   ){
+
     return;
+
   }
 
 
@@ -1693,335 +1497,74 @@ function deleteCurrentSet(index){
 }
 
 
-/* =========================================================
-   CURRENT SETS
-========================================================= */
+/* =========================
+   入力中セット表示
+========================= */
 
 function renderCurrentSets(){
 
   const area =
-    document.getElementById(
-      "currentSets"
-    );
-
+    document
+      .getElementById(
+        "currentSets"
+      );
 
   area.innerHTML = "";
 
 
-  if(
-    currentSets.length === 0
-  ){
+  currentSets.forEach(
+    (set,index)=>{
 
-    area.innerHTML = `
-
-      <div class="empty-sets">
-        まだセットがありません
-      </div>
-
-    `;
-
-  }else{
-
-    const title =
-      document.createElement(
-        "div"
-      );
-
-    title.className =
-      "set-list-title";
-
-    title.textContent =
-      "入力中のセット";
-
-    area.appendChild(title);
-
-
-    currentSets.forEach(
-      (set,index) => {
-
-        const item =
-          document.createElement(
-            "div"
-          );
-
-        item.className =
-          "set-item";
-
-
-        const number =
-          document.createElement(
-            "span"
-          );
-
-        number.className =
-          "set-number";
-
-        number.textContent =
-          "セット " +
-          (index + 1);
-
-
-        const value =
-          document.createElement(
-            "span"
-          );
-
-        value.className =
-          "set-value";
-
-        value.textContent =
-          set.weight +
-          " kg × " +
-          set.reps +
-          " 回";
-
-
-        const deleteButton =
-          document.createElement(
-            "button"
-          );
-
-        deleteButton.type =
-          "button";
-
-        deleteButton.className =
-          "set-delete";
-
-        deleteButton.textContent =
-          "削除";
-
-
-        deleteButton.addEventListener(
-          "click",
-          function(){
-
-            deleteCurrentSet(index);
-
-          }
+      const item =
+        document.createElement(
+          "div"
         );
 
-
-        item.appendChild(number);
-        item.appendChild(value);
-        item.appendChild(deleteButton);
-
-
-        area.appendChild(item);
-
-      }
-    );
-
-  }
-
-
-  document.getElementById(
-    "exercise"
-  ).disabled =
-    currentSets.length > 0;
-
-}
-
-
-/* =========================================================
-   TODAY
-========================================================= */
-
-function getTodayExercises(){
-
-  const date =
-    document.getElementById(
-      "trainingDate"
-    ).value;
-
-
-  const history =
-    getHistory();
-
-
-  const savedRecord =
-    history.find(
-      record =>
-        record.date === date
-    );
-
-
-  const savedExercises =
-    savedRecord
-      ? savedRecord.exercises || []
-      : [];
-
-
-  return [
-
-    ...savedExercises,
-
-    ...currentExercises
-
-  ];
-
-}
-
-
-function renderTodayExercises(){
-
-  const area =
-    document.getElementById(
-      "todayExercises"
-    );
-
-
-  const exercises =
-    getTodayExercises();
-
-
-  const selectedDate =
-    document.getElementById(
-      "trainingDate"
-    ).value;
-
-
-  document.getElementById(
-    "todayDateLabel"
-  ).textContent =
-    selectedDate
-      ? formatDate(selectedDate)
-      : "";
-
-
-  if(
-    exercises.length === 0
-  ){
-
-    area.innerHTML = `
-
-      <div class="today-empty">
-        まだ完了した種目はありません
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  let html = "";
-
-
-  exercises.forEach(
-    exercise => {
-
-      const sets =
-        exercise.sets || [];
-
-
-      const load =
-        calculateExerciseLoad(
-          sets
-        );
-
-
-      const best1RM =
-        getBestEstimated1RM(
-          sets
-        );
-
-
-      let setChips = "";
-
-
-      sets.forEach(
-        (set,index) => {
-
-          setChips += `
-
-            <div class="set-chip">
-
-              <div class="set-chip-label">
-                SET ${index + 1}
-              </div>
-
-              <div class="set-chip-value">
-                ${set.weight} ×
-                ${set.reps}
-              </div>
-
-            </div>
-
-          `;
-
-        }
-      );
-
-
-      html += `
-
-        <div class="today-exercise">
-
-          <div class="exercise-top">
-
-            <div class="today-exercise-name">
-              ${exercise.exercise}
-            </div>
-
-            <div class="today-exercise-summary">
-              ${sets.length} SET
-            </div>
-
+      item.className =
+        "set-item";
+
+
+      item.innerHTML = `
+
+        <span class="set-number">
+          SET ${index+1}
+        </span>
+
+        <span class="set-value">
+          ${set.weight} kg ×
+          ${set.reps} 回
+          <div class="one-rm">
+            推定1RM：
+            ${calculateEstimated1RM(
+              set.weight,
+              set.reps
+            ).toFixed(1)}
+            kg
           </div>
+        </span>
 
-
-          <div class="set-strip">
-            ${setChips}
-          </div>
-
-
-          <div class="exercise-stats">
-
-            <div class="stat-box">
-
-              <div class="stat-label">
-                TOTAL LOAD
-              </div>
-
-              <div class="stat-value">
-                ${load.toLocaleString()} kg
-              </div>
-
-            </div>
-
-
-            <div class="stat-box">
-
-              <div class="stat-label">
-                EST. 1RM
-              </div>
-
-              <div class="stat-value green">
-                ${best1RM.toFixed(1)} kg
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
+        <button
+          type="button"
+          class="set-delete"
+          onclick="deleteCurrentSet(${index})"
+        >
+          削除
+        </button>
 
       `;
+
+
+      area.appendChild(item);
 
     }
   );
 
-
-  area.innerHTML =
-    html;
-
 }
 
 
-/* =========================================================
-   COMPLETE EXERCISE
-========================================================= */
+/* =========================
+   種目完了
+========================= */
 
 function completeExercise(){
 
@@ -2044,11 +1587,13 @@ function completeExercise(){
 
   const sets =
     currentSets.map(
-      set => ({
+      set=>({
 
-        weight:set.weight,
+        weight:
+          set.weight,
 
-        reps:set.reps
+        reps:
+          set.reps
 
       })
     );
@@ -2056,9 +1601,11 @@ function completeExercise(){
 
   currentExercises.push({
 
-    exercise:exercise,
+    exercise:
+      exercise,
 
-    sets:sets,
+    sets:
+      sets,
 
     totalLoad:
       calculateExerciseLoad(
@@ -2073,37 +1620,320 @@ function completeExercise(){
 
   renderCurrentSets();
 
-
-  document.getElementById(
-    "exercise"
-  ).disabled = false;
-
-
-  document.getElementById(
-    "exercise"
-  ).value = "";
-
-
-  /*
-    前回記録を非表示
-  */
-
-  document.getElementById(
-    "previousRecord"
-  ).style.display =
-    "none";
-
-
   renderTodayExercises();
 
   updateTodayTotal();
 
+
+  document
+    .getElementById(
+      "exercise"
+    )
+    .value = "";
+
+
+  document
+    .getElementById(
+      "weight"
+    )
+    .value = "";
+
+
+  document
+    .getElementById(
+      "reps"
+    )
+    .value = "";
+
+
+  updatePreviousRecord();
+
+
+  /* 次の種目をすぐ選択 */
+
+  document
+    .getElementById(
+      "exercise"
+    )
+    .focus();
+
 }
 
 
-/* =========================================================
-   TOTAL
-========================================================= */
+/* =========================
+   今日の表示
+========================= */
+
+function renderTodayExercises(){
+
+  const area =
+    document
+      .getElementById(
+        "todayExercises"
+      );
+
+
+  const selectedDate =
+    document
+      .getElementById(
+        "trainingDate"
+      )
+      .value;
+
+
+  const exercises =
+    getTodayExercises();
+
+
+  const isToday =
+    selectedDate ===
+    getToday();
+
+
+  document
+    .getElementById(
+      "todayTitle"
+    )
+    .textContent =
+      isToday
+        ? "今日のトレーニング"
+        : `${formatDate(selectedDate)}のトレーニング`;
+
+
+  if(
+    exercises.length === 0
+  ){
+
+    area.innerHTML = `
+      <div class="today-empty">
+        まだ完了した種目はありません
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  let html = "";
+
+
+  exercises.forEach(
+    exercise=>{
+
+      const sets =
+        exercise.sets || [];
+
+      const load =
+        calculateExerciseLoad(
+          sets
+        );
+
+
+      const previous =
+        findPreviousRecord(
+          exercise.exercise,
+          selectedDate
+        );
+
+
+      html += `
+
+        <div class="today-exercise">
+
+          <div class="today-exercise-name">
+            ${exercise.exercise}
+          </div>
+
+          <div class="today-exercise-summary">
+            ${sets.length}セット
+          </div>
+
+      `;
+
+
+      sets.forEach(
+        (set,index)=>{
+
+          html += `
+
+            <div class="today-set">
+              SET ${index+1}：
+              ${set.weight} kg ×
+              ${set.reps} 回
+            </div>
+
+            <div class="one-rm">
+              推定1RM：
+              ${calculateEstimated1RM(
+                set.weight,
+                set.reps
+              ).toFixed(1)}
+              kg
+            </div>
+
+          `;
+
+        }
+      );
+
+
+      html += `
+
+          <div class="today-exercise-total">
+            種目総負荷：
+            ${load.toLocaleString()}
+            kg
+          </div>
+
+          <div class="one-rm-best">
+            今回の推定1RM：
+            ${getBestEstimated1RM(
+              sets
+            ).toFixed(1)}
+            kg
+          </div>
+
+      `;
+
+
+      /* =========================
+         前回比較
+      ========================= */
+
+      if(previous){
+
+        const previousLoad =
+          calculateExerciseLoad(
+            previous.exercise.sets || []
+          );
+
+
+        const current1RM =
+          getBestEstimated1RM(
+            sets
+          );
+
+        const previous1RM =
+          getBestEstimated1RM(
+            previous.exercise.sets || []
+          );
+
+
+        const difference =
+          load - previousLoad;
+
+
+        const percent =
+          previousLoad > 0
+            ? (
+              difference /
+              previousLoad
+            ) * 100
+            : 0;
+
+
+        const rmDifference =
+          current1RM -
+          previous1RM;
+
+
+        let comparisonClass =
+          "comparison-same";
+
+
+        if(difference > 0){
+          comparisonClass =
+            "comparison-up";
+        }
+
+        if(difference < 0){
+          comparisonClass =
+            "comparison-down";
+        }
+
+
+        const sign =
+          difference > 0
+            ? "+"
+            : "";
+
+
+        const rmSign =
+          rmDifference >= 0
+            ? "+"
+            : "";
+
+
+        html += `
+
+          <div class="comparison-box">
+
+            <div class="comparison-title">
+              前回との比較
+            </div>
+
+            <div class="comparison-line">
+              前回：
+              ${formatDate(previous.date)}
+            </div>
+
+            <div class="comparison-line">
+              前回総負荷：
+              ${previousLoad.toLocaleString()}
+              kg
+            </div>
+
+            <div class="comparison-line">
+              今回総負荷：
+              ${load.toLocaleString()}
+              kg
+            </div>
+
+            <div class="comparison-line ${comparisonClass}">
+              前回比：
+              ${sign}${difference.toLocaleString()}
+              kg
+              （${sign}${percent.toFixed(1)}%）
+            </div>
+
+            <div class="comparison-line">
+              推定1RM：
+              前回
+              ${previous1RM.toFixed(1)}
+              kg →
+              今回
+              ${current1RM.toFixed(1)}
+              kg
+              （${rmSign}${rmDifference.toFixed(1)} kg）
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+
+      html += `
+
+        </div>
+
+      `;
+
+    }
+  );
+
+
+  area.innerHTML =
+    html;
+
+}
+
+
+/* =========================
+   今日の総負荷
+========================= */
 
 function updateTodayTotal(){
 
@@ -2115,7 +1945,7 @@ function updateTodayTotal(){
 
 
   exercises.forEach(
-    exercise => {
+    exercise=>{
 
       total +=
         calculateExerciseLoad(
@@ -2125,6 +1955,8 @@ function updateTodayTotal(){
     }
   );
 
+
+  /* 現在入力中のセット */
 
   if(
     currentSets.length > 0
@@ -2138,24 +1970,28 @@ function updateTodayTotal(){
   }
 
 
-  document.getElementById(
-    "todayTotalLoad"
-  ).textContent =
-    total.toLocaleString();
+  document
+    .getElementById(
+      "todayTotalLoad"
+    )
+    .textContent =
+      total.toLocaleString();
 
 }
 
 
-/* =========================================================
-   SAVE
-========================================================= */
+/* =========================
+   保存
+========================= */
 
 function saveTodayWorkout(){
 
   const date =
-    document.getElementById(
-      "trainingDate"
-    ).value;
+    document
+      .getElementById(
+        "trainingDate"
+      )
+      .value;
 
 
   if(!date){
@@ -2182,9 +2018,36 @@ function saveTodayWorkout(){
     currentExercises.length === 0
   ){
 
-    alert(
-      "保存する新しい種目がありません"
-    );
+    const history =
+      getHistory();
+
+    const existing =
+      history.find(
+        record =>
+          record.date === date
+      );
+
+
+    if(
+      !existing ||
+      !existing.exercises ||
+      existing.exercises.length === 0
+    ){
+
+      alert(
+        "まずトレーニングを入力してください"
+      );
+
+      return;
+
+    }
+
+
+    renderTodayExercises();
+
+    updateTodayTotal();
+
+    renderHistory();
 
     return;
 
@@ -2212,14 +2075,13 @@ function saveTodayWorkout(){
 
     dayRecord = {
 
-      date:date,
+      date:
+        date,
 
-      exercises:[
-        ...currentExercises
-      ]
+      exercises:
+        [...currentExercises]
 
     };
-
 
     history.unshift(
       dayRecord
@@ -2238,28 +2100,35 @@ function saveTodayWorkout(){
 
   renderCurrentSets();
 
-
-  document.getElementById(
-    "exercise"
-  ).disabled = false;
-
-
-  document.getElementById(
-    "exercise"
-  ).value = "";
-
-
-  document.getElementById(
-    "previousRecord"
-  ).style.display =
-    "none";
-
-
   renderTodayExercises();
 
   updateTodayTotal();
 
   renderHistory();
+
+
+  document
+    .getElementById(
+      "exercise"
+    )
+    .value = "";
+
+
+  document
+    .getElementById(
+      "weight"
+    )
+    .value = "";
+
+
+  document
+    .getElementById(
+      "reps"
+    )
+    .value = "";
+
+
+  updatePreviousRecord();
 
 
   alert(
@@ -2269,23 +2138,24 @@ function saveTodayWorkout(){
 }
 
 
-/* =========================================================
-   HISTORY
-========================================================= */
+/* =========================
+   履歴表示
+========================= */
 
 function renderHistory(){
 
   const area =
-    document.getElementById(
-      "history"
-    );
-
-
-  area.innerHTML = "";
+    document
+      .getElementById(
+        "history"
+      );
 
 
   const history =
     getHistory();
+
+
+  area.innerHTML = "";
 
 
   if(
@@ -2293,11 +2163,9 @@ function renderHistory(){
   ){
 
     area.innerHTML = `
-
-      <div class="empty-sets">
+      <div class="empty">
         まだ記録がありません
       </div>
-
     `;
 
     return;
@@ -2307,160 +2175,133 @@ function renderHistory(){
 
   history
     .sort(
-      (a,b) =>
+      (a,b)=>
         b.date.localeCompare(
           a.date
         )
     )
     .forEach(
-      record => {
+      record=>{
 
         const item =
           document.createElement(
             "div"
           );
 
-
         item.className =
           "record";
 
 
-        let exercisesHTML = "";
+        let exercisesHTML =
+          "";
 
         let dayTotal = 0;
 
 
-        (
-          record.exercises || []
-        ).forEach(
-          exercise => {
+        (record.exercises || [])
+          .forEach(
+            exercise=>{
 
-            const sets =
-              exercise.sets || [];
-
-
-            const load =
-              calculateExerciseLoad(
-                sets
-              );
+              const sets =
+                exercise.sets || [];
 
 
-            const best1RM =
-              getBestEstimated1RM(
-                sets
-              );
+              const exerciseLoad =
+                calculateExerciseLoad(
+                  sets
+                );
 
 
-            dayTotal += load;
+              dayTotal +=
+                exerciseLoad;
 
 
-            let rows = "";
+              let setsHTML =
+                "";
 
 
-            sets.forEach(
-              (set,index) => {
+              sets.forEach(
+                (set,index)=>{
 
-                rows += `
+                  setsHTML += `
 
-                  <div class="history-set-row">
-                    SET ${index + 1}
-                    &nbsp;
+                    SET ${index+1}：
                     ${set.weight} kg ×
                     ${set.reps} 回
-                  </div>
 
-                `;
+                    <br>
 
-              }
-            );
+                    <span class="one-rm">
+                      推定1RM：
+                      ${calculateEstimated1RM(
+                        set.weight,
+                        set.reps
+                      ).toFixed(1)}
+                      kg
+                    </span>
+
+                    <br>
+
+                  `;
+
+                }
+              );
 
 
-            exercisesHTML += `
+              exercisesHTML += `
 
-              <div class="history-exercise">
-
-                <div class="history-exercise-name">
+                <div class="exercise">
                   ${exercise.exercise}
                 </div>
 
-                ${rows}
+                <div class="details">
 
-                <div class="history-stats">
+                  ${setsHTML}
 
-                  <div class="history-stat">
-
-                    <div class="history-stat-label">
-                      TOTAL LOAD
-                    </div>
-
-                    <div class="history-stat-value">
-                      ${load.toLocaleString()} kg
-                    </div>
-
+                  <div class="exercise-total">
+                    種目総負荷：
+                    ${exerciseLoad.toLocaleString()}
+                    kg
                   </div>
 
-
-                  <div class="history-stat">
-
-                    <div class="history-stat-label">
-                      EST. 1RM
-                    </div>
-
-                    <div class="history-stat-value green">
-                      ${best1RM.toFixed(1)} kg
-                    </div>
-
+                  <div class="one-rm-best">
+                    推定1RM：
+                    ${getBestEstimated1RM(
+                      sets
+                    ).toFixed(1)}
+                    kg
                   </div>
 
                 </div>
 
-              </div>
+              `;
 
-            `;
-
-          }
-        );
+            }
+          );
 
 
         item.innerHTML = `
 
-          <div class="history-date">
-
-            <div class="date-title">
-              ${formatDate(record.date)}
-            </div>
-
-            <div class="history-label">
-              SESSION
-            </div>
-
+          <div class="date-title">
+            ${formatDate(record.date)}
           </div>
-
 
           <div class="workout-title">
-            TRAINING SESSION
+            TRAINING
           </div>
-
 
           ${exercisesHTML}
 
-
           <div class="day-total">
-
-            <div class="day-total-label">
-              DAY TOTAL LOAD
-            </div>
-
-            <div class="day-total-value">
-              ${dayTotal.toLocaleString()} kg
-            </div>
-
+            1日の総負荷：
+            ${dayTotal.toLocaleString()}
+            kg
           </div>
-
 
           <button
             type="button"
             class="delete-button"
+            onclick="deleteWorkout('${record.date}')"
           >
             この記録を削除
           </button>
@@ -2468,23 +2309,9 @@ function renderHistory(){
         `;
 
 
-        item
-          .querySelector(
-            ".delete-button"
-          )
-          .addEventListener(
-            "click",
-            function(){
-
-              deleteWorkout(
-                record.date
-              );
-
-            }
-          );
-
-
-        area.appendChild(item);
+        area.appendChild(
+          item
+        );
 
       }
     );
@@ -2492,21 +2319,20 @@ function renderHistory(){
 }
 
 
-/* =========================================================
-   DELETE HISTORY
-========================================================= */
+/* =========================
+   日単位削除
+========================= */
 
 function deleteWorkout(date){
 
-  if(
-    !confirm(
-      formatDate(date) +
-      "のトレーニング記録を削除しますか？"
-    )
-  ){
+  const ok =
+    confirm(
+      `${formatDate(date)}のトレーニング記録を削除しますか？`
+    );
 
+
+  if(!ok){
     return;
-
   }
 
 
@@ -2530,149 +2356,55 @@ function deleteWorkout(date){
 
   updateTodayTotal();
 
+  updatePreviousRecord();
+
 }
 
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-const navButtons =
-  document.querySelectorAll(
-    ".nav-button"
-  );
+/* ==================================================
+   STEP 5
+   入力速度最優先
+================================================== */
 
 
-navButtons.forEach(
-  button => {
+/* =========================
+   重量 Enter
+   ↓
+   回数へ
+========================= */
 
-    button.addEventListener(
-      "click",
-      function(){
+document
+  .getElementById("weight")
+  .addEventListener(
+    "keydown",
+    function(event){
 
-        const target =
-          document.getElementById(
-            this.dataset.target
-          );
+      if(
+        event.key === "Enter"
+      ){
 
+        event.preventDefault();
 
-        if(!target){
-          return;
-        }
-
-
-        target.scrollIntoView({
-          behavior:"smooth",
-          block:"start"
-        });
-
-
-        navButtons.forEach(
-          item =>
-            item.classList.remove(
-              "active"
-            )
-        );
-
-
-        this.classList.add(
-          "active"
-        );
+        document
+          .getElementById(
+            "reps"
+          )
+          .focus();
 
       }
-    );
-
-  }
-);
-
-
-/* =========================================================
-   EVENTS
-========================================================= */
-
-document
-  .getElementById(
-    "addSetButton"
-  )
-  .addEventListener(
-    "click",
-    addSet
-  );
-
-
-document
-  .getElementById(
-    "completeExerciseButton"
-  )
-  .addEventListener(
-    "click",
-    completeExercise
-  );
-
-
-document
-  .getElementById(
-    "saveTodayButton"
-  )
-  .addEventListener(
-    "click",
-    saveTodayWorkout
-  );
-
-
-document
-  .getElementById(
-    "exercise"
-  )
-  .addEventListener(
-    "change",
-    function(){
-
-      updatePreviousRecord();
 
     }
   );
 
 
-document
-  .getElementById(
-    "trainingDate"
-  )
-  .addEventListener(
-    "change",
-    function(){
-
-      currentSets = [];
-      currentExercises = [];
-
-      renderCurrentSets();
-
-      document.getElementById(
-        "exercise"
-      ).disabled = false;
-
-      document.getElementById(
-        "exercise"
-      ).value = "";
-
-      document.getElementById(
-        "previousRecord"
-      ).style.display = "none";
-
-      renderTodayExercises();
-
-      updateTodayTotal();
-
-    }
-  );
-
-
-/* Enterでセット追加 */
+/* =========================
+   回数 Enter
+   ↓
+   セット追加
+========================= */
 
 document
-  .getElementById(
-    "reps"
-  )
+  .getElementById("reps")
   .addEventListener(
     "keydown",
     function(event){
@@ -2691,14 +2423,141 @@ document
   );
 
 
-/* =========================================================
-   INIT
-========================================================= */
+/* =========================
+   種目変更
+========================= */
 
-document.getElementById(
-  "trainingDate"
-).value =
-  getToday();
+document
+  .getElementById("exercise")
+  .addEventListener(
+    "change",
+    function(){
+
+      currentSets = [];
+
+      renderCurrentSets();
+
+      updatePreviousRecord();
+
+      updateTodayTotal();
+
+    }
+  );
+
+
+/* =========================
+   日付変更
+========================= */
+
+document
+  .getElementById("trainingDate")
+  .addEventListener(
+    "change",
+    function(){
+
+      currentSets = [];
+
+      currentExercises = [];
+
+      renderCurrentSets();
+
+      renderTodayExercises();
+
+      updateTodayTotal();
+
+      updatePreviousRecord();
+
+    }
+  );
+
+
+/* =========================
+   ナビゲーション
+========================= */
+
+document
+  .querySelectorAll(
+    ".nav-button"
+  )
+  .forEach(
+    button=>{
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          const target =
+            document.getElementById(
+              button.dataset.target
+            );
+
+
+          if(!target){
+            return;
+          }
+
+
+          target.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+          });
+
+
+          document
+            .querySelectorAll(
+              ".nav-button"
+            )
+            .forEach(
+              nav =>
+                nav.classList.remove(
+                  "active"
+                )
+            );
+
+
+          button.classList.add(
+            "active"
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================
+   分析ボタン
+   今はSTEP 5なので
+   記録画面へ
+========================= */
+
+document
+  .querySelector(
+    '[data-target="analysisSection"]'
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      alert(
+        "分析機能は次のSTEPで追加します。"
+      );
+
+    }
+  );
+
+
+/* =========================
+   初期化
+========================= */
+
+document
+  .getElementById(
+    "trainingDate"
+  )
+  .value =
+    getToday();
 
 
 renderHistory();
@@ -2706,8 +2565,6 @@ renderHistory();
 renderTodayExercises();
 
 updateTodayTotal();
-
-renderCurrentSets();
 
 </script>
 
