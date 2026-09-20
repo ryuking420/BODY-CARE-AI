@@ -189,15 +189,6 @@ select{
   pointer-events:none;
 }
 
-
-/* =========================
-   自重モード
-========================= */
-
-.bodyweight-mode{
-  position:relative;
-}
-
 .bodyweight-input{
   color:#cfd6dc!important;
   background:#10161b!important;
@@ -368,14 +359,19 @@ button:disabled{
 }
 
 
-/* =========================
-   今日
-========================= */
+/* =========================================================
+   今日のトレーニング
+   情報階層を整理したダッシュボード型UI
+========================================================= */
 
 .today-card{
   position:relative;
   overflow:hidden;
-  background:linear-gradient(145deg,#171e24,#101419);
+  background:linear-gradient(
+    145deg,
+    #171e24,
+    #101419
+  );
   border:1px solid #303942;
   border-radius:21px;
   padding:20px;
@@ -398,12 +394,13 @@ button:disabled{
   display:flex;
   justify-content:space-between;
   align-items:flex-end;
-  margin-bottom:21px;
+  margin-bottom:23px;
 }
 
 .today-heading{
   font-size:21px;
   font-weight:900;
+  letter-spacing:-.3px;
 }
 
 .today-date{
@@ -412,15 +409,14 @@ button:disabled{
   font-weight:800;
 }
 
-.today-empty{
-  color:var(--muted);
-  font-size:14px;
-  padding:10px 0;
-}
+
+/* =========================
+   今日の種目カード
+========================= */
 
 .today-exercise{
-  padding:18px 0;
-  border-top:1px solid var(--line);
+  padding:20px 0;
+  border-top:1px solid #2a333b;
 }
 
 .today-exercise:first-child{
@@ -432,47 +428,77 @@ button:disabled{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:13px;
+  gap:12px;
+  margin-bottom:15px;
 }
 
 .today-exercise-name{
+  min-width:0;
+  color:#f4f6f8;
   font-size:20px;
   font-weight:900;
+  letter-spacing:-.4px;
+  line-height:1.25;
 }
 
 .today-exercise-summary{
-  color:var(--green);
-  font-size:11px;
+  flex-shrink:0;
+  color:#74808a;
+  font-size:10px;
   font-weight:900;
+  letter-spacing:.8px;
 }
+
+
+/* =========================
+   セットグリッド
+   3列固定ではなく、何セットでも
+   自動的に次の行へ流れる
+========================= */
 
 .set-strip{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:6px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:7px;
   margin-bottom:14px;
 }
 
 .set-chip{
-  padding:9px 5px;
-  border-radius:9px;
-  background:#0c1115;
-  border:1px solid #242c33;
+  min-width:0;
+  min-height:58px;
+  padding:8px 5px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  background:#0b1014;
+  border:1px solid #252e36;
   text-align:center;
 }
 
 .set-chip-label{
-  color:#626d77;
-  font-size:9px;
+  color:#606b75;
+  font-size:8px;
   font-weight:800;
+  letter-spacing:.5px;
+  line-height:1;
 }
 
 .set-chip-value{
-  color:#dfe4e8;
-  font-size:12px;
+  margin-top:5px;
+  color:#eef2f4;
+  font-size:14px;
   font-weight:800;
+  letter-spacing:-.2px;
+  line-height:1.1;
   white-space:nowrap;
 }
+
+
+/* =========================
+   種目の主要指標
+========================= */
 
 .exercise-stats{
   display:grid;
@@ -481,58 +507,29 @@ button:disabled{
 }
 
 .stat-box{
-  padding:12px;
+  padding:12px 13px;
   border-radius:11px;
   background:#0d1216;
   border:1px solid #252d35;
 }
 
 .stat-label{
-  color:#68727c;
-  font-size:10px;
+  color:#65707a;
+  font-size:9px;
   font-weight:800;
+  letter-spacing:.7px;
 }
 
 .stat-value{
-  margin-top:3px;
-  color:#fff;
-  font-size:18px;
+  margin-top:4px;
+  color:#f2f5f7;
+  font-size:17px;
   font-weight:900;
+  line-height:1.2;
 }
 
 .stat-value.green{
   color:var(--green);
-}
-
-.comparison-box{
-  margin-top:10px;
-  padding:12px;
-  border-radius:11px;
-  background:#0b1014;
-  border:1px solid #242c33;
-}
-
-.comparison-title{
-  margin-bottom:5px;
-  color:#e7eaed;
-  font-size:11px;
-  font-weight:900;
-}
-
-.comparison-line{
-  color:#7f8993;
-  font-size:12px;
-  line-height:1.7;
-}
-
-.comparison-up{
-  color:var(--green)!important;
-  font-weight:900;
-}
-
-.comparison-down{
-  color:#ff6666!important;
-  font-weight:900;
 }
 
 
@@ -544,7 +541,11 @@ button:disabled{
   padding:21px;
   margin-bottom:15px;
   border-radius:20px;
-  background:linear-gradient(135deg,#14241b,#0d1511);
+  background:linear-gradient(
+    135deg,
+    #14241b,
+    #0d1511
+  );
   border:1px solid rgba(50,212,127,.24);
   text-align:center;
 }
@@ -690,7 +691,11 @@ button:disabled{
 ========================= */
 
 .analysis-card{
-  background:linear-gradient(145deg,#151c22,#101419);
+  background:linear-gradient(
+    145deg,
+    #151c22,
+    #101419
+  );
   border:1px solid #2c353e;
   border-radius:20px;
   padding:22px;
@@ -793,6 +798,11 @@ button:disabled{
   background:rgba(50,212,127,.09);
 }
 
+
+/* =========================
+   スマホ最適化
+========================= */
+
 @media(max-width:420px){
 
   .container{
@@ -808,6 +818,48 @@ button:disabled{
 
   .app-title{
     font-size:29px;
+  }
+
+  .today-exercise-name{
+    font-size:19px;
+  }
+
+  .set-strip{
+    gap:6px;
+  }
+
+  .set-chip{
+    min-height:55px;
+    padding:7px 3px;
+  }
+
+  .set-chip-value{
+    font-size:13px;
+  }
+
+}
+
+
+/* =========================
+   極小画面
+========================= */
+
+@media(max-width:350px){
+
+  .set-chip{
+    min-height:52px;
+  }
+
+  .set-chip-label{
+    font-size:7px;
+  }
+
+  .set-chip-value{
+    font-size:12px;
+  }
+
+  .today-exercise-name{
+    font-size:18px;
   }
 
 }
@@ -837,6 +889,10 @@ button:disabled{
 
 </header>
 
+
+<!-- =====================================================
+     記録
+===================================================== -->
 
 <section id="recordSection" class="app-section">
 
@@ -1005,11 +1061,14 @@ button:disabled{
     style="display:none"
   ></div>
 
-
 </div>
 
 </section>
 
+
+<!-- =====================================================
+     今日
+===================================================== -->
 
 <section id="todaySection" class="app-section">
 
@@ -1071,6 +1130,10 @@ button:disabled{
 </section>
 
 
+<!-- =====================================================
+     履歴
+===================================================== -->
+
 <section id="historySection" class="app-section">
 
 <div class="card">
@@ -1093,6 +1156,10 @@ button:disabled{
 
 </section>
 
+
+<!-- =====================================================
+     AI
+===================================================== -->
 
 <section id="analysisSection" class="app-section">
 
@@ -1128,6 +1195,10 @@ button:disabled{
 
 </div>
 
+
+<!-- =====================================================
+     下部ナビ
+===================================================== -->
 
 <nav class="bottom-nav">
 
@@ -1187,16 +1258,6 @@ let currentExercises = [];
 /* =========================================================
    BODYWEIGHT
 ========================================================= */
-
-/*
-  現在は懸垂を自重種目として扱う。
-
-  将来的には、
-  bodyweight
-  + externalLoad
-  bodyweight - assistance
-  のように拡張可能。
-*/
 
 const bodyweightExercises = [
   "懸垂"
@@ -1307,11 +1368,6 @@ function calculateExerciseLoad(sets){
     sets || []
   ).reduce(
     (total,set) => {
-
-      /*
-        自重は現在体重データがないため、
-        総負荷計算には含めない。
-      */
 
       if(
         set.type === "bodyweight"
@@ -2032,7 +2088,6 @@ function renderCurrentSets(){
         item.appendChild(value);
         item.appendChild(deleteButton);
 
-
         area.appendChild(item);
 
       }
@@ -2088,6 +2143,10 @@ function getTodayExercises(){
 
 }
 
+
+/* =========================================================
+   今日のトレーニング表示
+========================================================= */
 
 function renderTodayExercises(){
 
@@ -2163,6 +2222,11 @@ function renderTodayExercises(){
       let setChips = "";
 
 
+      /*
+        セット数に制限を設けない。
+        CSS gridが自動的に次の行へ送る。
+      */
+
       sets.forEach(
         (set,index) => {
 
@@ -2225,7 +2289,9 @@ function renderTodayExercises(){
 
 
           <div class="set-strip">
+
             ${setChips}
+
           </div>
 
 
@@ -2257,11 +2323,13 @@ function renderTodayExercises(){
             <div class="stat-box">
 
               <div class="stat-label">
+
                 ${
                   bodyweight
                     ? "STRENGTH"
                     : "EST. 1RM"
                 }
+
               </div>
 
               <div class="stat-value green">
@@ -2728,23 +2796,22 @@ function renderHistory(){
                   <div class="history-stat">
 
                     <div class="history-stat-label">
+
                       ${
                         bodyweight
                           ? "STRENGTH"
                           : "EST. 1RM"
                       }
+
                     </div>
 
                     <div class="history-stat-value green">
 
                       ${
                         bodyweight
-
                           ? "自重"
-
                           : best1RM.toFixed(1) +
                             " kg"
-
                       }
 
                     </div>
