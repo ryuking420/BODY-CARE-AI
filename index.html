@@ -139,7 +139,6 @@
 
     </div>
 
-
     <div class="card">
 
       <h2>トレーニング記録</h2>
@@ -154,9 +153,74 @@
 
   </div>
 
-
   <script>
 
+    // 保存されている記録を読み込む
+    function loadRecords() {
+
+      const savedRecords =
+        localStorage.getItem("trainingRecords");
+
+      if (!savedRecords) {
+        return;
+      }
+
+      const records =
+        JSON.parse(savedRecords);
+
+      records.forEach(record => {
+        displayRecord(
+          record.exercise,
+          record.weight,
+          record.reps
+        );
+      });
+    }
+
+
+    // 記録を保存する
+    function saveRecords(records) {
+
+      localStorage.setItem(
+        "trainingRecords",
+        JSON.stringify(records)
+      );
+    }
+
+
+    // 画面に記録を表示する
+    function displayRecord(exercise, weight, reps) {
+
+      const recordsArea =
+        document.getElementById("records");
+
+      const empty =
+        recordsArea.querySelector(".empty");
+
+      if (empty) {
+        empty.remove();
+      }
+
+      const record =
+        document.createElement("div");
+
+      record.className = "record";
+
+      record.innerHTML = `
+        <div class="exercise">
+          ${exercise}
+        </div>
+
+        <div class="details">
+          ${weight} kg × ${reps} 回
+        </div>
+      `;
+
+      recordsArea.prepend(record);
+    }
+
+
+    // 新しい記録を追加する
     function addRecord() {
 
       const exercise =
@@ -170,47 +234,54 @@
 
 
       if (!exercise || !weight || !reps) {
-        alert("種目・重量・回数をすべて入力してください");
+
+        alert(
+          "種目・重量・回数をすべて入力してください"
+        );
+
         return;
       }
 
 
+      // 現在の保存データを取得
+      const savedRecords =
+        localStorage.getItem("trainingRecords");
+
       const records =
-        document.getElementById("records");
+        savedRecords
+          ? JSON.parse(savedRecords)
+          : [];
 
 
-      const empty =
-        records.querySelector(".empty");
-
-      if (empty) {
-        empty.remove();
-      }
-
-
-      const record =
-        document.createElement("div");
-
-      record.className = "record";
+      // 新しい記録を追加
+      records.unshift({
+        exercise: exercise,
+        weight: weight,
+        reps: reps
+      });
 
 
-      record.innerHTML = `
-        <div class="exercise">
-          ${exercise}
-        </div>
-
-        <div class="details">
-          ${weight} kg × ${reps} 回
-        </div>
-      `;
+      // 保存
+      saveRecords(records);
 
 
-      records.prepend(record);
+      // 画面にも表示
+      displayRecord(
+        exercise,
+        weight,
+        reps
+      );
 
 
+      // 入力欄を空にする
       document.getElementById("exercise").value = "";
       document.getElementById("weight").value = "";
       document.getElementById("reps").value = "";
     }
+
+
+    // ページを開いたときに保存データを読み込む
+    loadRecords();
 
   </script>
 
