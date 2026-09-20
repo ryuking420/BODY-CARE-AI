@@ -49,6 +49,7 @@
       margin-top: 0;
     }
 
+    select,
     input {
       width: 100%;
       padding: 14px;
@@ -111,13 +112,25 @@
     <div class="card">
 
       <label for="exercise">種目</label>
-      <input
-        type="text"
-        id="exercise"
-        placeholder="例：ベンチプレス"
-      >
+
+      <select id="exercise">
+        <option value="">種目を選択してください</option>
+        <option value="ベンチプレス">ベンチプレス</option>
+        <option value="スクワット">スクワット</option>
+        <option value="デッドリフト">デッドリフト</option>
+        <option value="RDL">RDL</option>
+        <option value="ラットプルダウン">ラットプルダウン</option>
+        <option value="懸垂">懸垂</option>
+        <option value="レッグプレス">レッグプレス</option>
+        <option value="ショルダープレス">ショルダープレス</option>
+        <option value="サイドレイズ">サイドレイズ</option>
+        <option value="ペックフライ">ペックフライ</option>
+        <option value="フェイスプル">フェイスプル</option>
+      </select>
+
 
       <label for="weight">重量（kg）</label>
+
       <input
         type="number"
         id="weight"
@@ -125,7 +138,9 @@
         inputmode="decimal"
       >
 
+
       <label for="reps">回数</label>
+
       <input
         type="number"
         id="reps"
@@ -133,25 +148,30 @@
         inputmode="numeric"
       >
 
+
       <button onclick="addRecord()">
         記録する
       </button>
 
     </div>
 
+
     <div class="card">
 
       <h2>トレーニング記録</h2>
 
       <div id="records">
+
         <div class="empty">
           まだ記録がありません
         </div>
+
       </div>
 
     </div>
 
   </div>
+
 
   <script>
 
@@ -168,12 +188,15 @@
       const records =
         JSON.parse(savedRecords);
 
+      // 古い記録から順番に表示
       records.forEach(record => {
+
         displayRecord(
           record.exercise,
           record.weight,
           record.reps
         );
+
       });
     }
 
@@ -189,7 +212,11 @@
 
 
     // 画面に記録を表示する
-    function displayRecord(exercise, weight, reps) {
+    function displayRecord(
+      exercise,
+      weight,
+      reps
+    ) {
 
       const recordsArea =
         document.getElementById("records");
@@ -201,10 +228,12 @@
         empty.remove();
       }
 
+
       const record =
         document.createElement("div");
 
       record.className = "record";
+
 
       record.innerHTML = `
         <div class="exercise">
@@ -216,6 +245,7 @@
         </div>
       `;
 
+
       recordsArea.prepend(record);
     }
 
@@ -224,7 +254,7 @@
     function addRecord() {
 
       const exercise =
-        document.getElementById("exercise").value.trim();
+        document.getElementById("exercise").value;
 
       const weight =
         document.getElementById("weight").value;
@@ -233,6 +263,7 @@
         document.getElementById("reps").value;
 
 
+      // 入力チェック
       if (!exercise || !weight || !reps) {
 
         alert(
@@ -255,9 +286,13 @@
 
       // 新しい記録を追加
       records.unshift({
+
         exercise: exercise,
+
         weight: weight,
+
         reps: reps
+
       });
 
 
@@ -265,7 +300,7 @@
       saveRecords(records);
 
 
-      // 画面にも表示
+      // 画面に表示
       displayRecord(
         exercise,
         weight,
@@ -273,9 +308,11 @@
       );
 
 
-      // 入力欄を空にする
+      // 入力欄をリセット
       document.getElementById("exercise").value = "";
+
       document.getElementById("weight").value = "";
+
       document.getElementById("reps").value = "";
     }
 
