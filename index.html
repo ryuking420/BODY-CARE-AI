@@ -218,11 +218,6 @@ document
       findTodayExercise(exercise);
 
 
-    /*
-      すでに今日やった種目なら
-      そのセットを復元
-    */
-
     if (existing) {
 
       currentSets =
@@ -334,10 +329,6 @@ function addSet() {
 
   updateComparison();
 
-
-  /*
-    入力欄を空にする
-  */
 
   document
     .getElementById("weight")
@@ -458,15 +449,6 @@ function completeExercise() {
   };
 
 
-  /*
-    ★重要
-
-    同じ種目が今日すでに存在する場合
-    その種目だけ更新
-
-    他の種目は絶対に消さない
-  */
-
   const existingIndex =
     todayExercises.findIndex(function(exerciseData) {
 
@@ -487,20 +469,10 @@ function completeExercise() {
   }
 
 
-  /*
-    表示更新
-  */
-
   renderTodayExercises();
 
   updateTodayTotal();
 
-
-  /*
-    現在入力中のセットだけリセット
-
-    今日の種目データは残る
-  */
 
   currentSets = [];
 
@@ -531,10 +503,6 @@ function completeExercise() {
 ========================= */
 
 function renderTodayExercises() {
-
-  /*
-    今日の種目表示がない場合は何もしない
-  */
 
   const area =
     document.getElementById(
@@ -576,7 +544,7 @@ function renderTodayExercises() {
         ${exercise.exercise}
       </strong>
 
-     　${exercise.sets.length}セット
+      　${exercise.sets.length}セット
 
       　${formatNumber(
          calculateLoad(exercise.sets)
@@ -662,15 +630,6 @@ function saveTodayWorkout() {
     });
 
 
-  /*
-    ★ここが今回の最重要修正
-
-    同じ日付があっても
-    その日の「全種目」を保存する
-
-    1種目だけで上書きしない
-  */
-
   const record = {
 
     id:
@@ -712,12 +671,6 @@ function saveTodayWorkout() {
 
   if (existingIndex >= 0) {
 
-    /*
-      同じ日の記録を更新
-
-      ただし全種目を保持
-    */
-
     workouts[existingIndex] =
       record;
 
@@ -738,7 +691,6 @@ function saveTodayWorkout() {
 
 
   saveWorkouts(workouts);
-
 
   renderHistory();
 
@@ -952,6 +904,7 @@ function updatePreviousRecord() {
 
 /* =========================
    前回比較
+   ★ kg差 + 増減率
 ========================= */
 
 function updateComparison() {
@@ -1022,8 +975,28 @@ function updateComparison() {
     previousLoad;
 
 
-  const sign =
+  let percentage = 0;
+
+
+  if (previousLoad !== 0) {
+
+    percentage =
+      (
+        difference /
+        previousLoad
+      ) * 100;
+
+  }
+
+
+  const kgSign =
     difference > 0
+      ? "+"
+      : "";
+
+
+  const percentSign =
+    percentage > 0
       ? "+"
       : "";
 
@@ -1033,8 +1006,11 @@ function updateComparison() {
     <div class="comparison">
 
       <div class="comparison-title">
+
         前回との比較
+
       </div>
+
 
       <div class="comparison-row">
 
@@ -1043,10 +1019,15 @@ function updateComparison() {
         </span>
 
         <strong>
-          ${formatNumber(previousLoad)} kg
+
+          ${formatNumber(
+            previousLoad
+          )} kg
+
         </strong>
 
       </div>
+
 
       <div class="comparison-row">
 
@@ -1055,16 +1036,29 @@ function updateComparison() {
         </span>
 
         <strong>
-          ${formatNumber(currentLoad)} kg
+
+          ${formatNumber(
+            currentLoad
+          )} kg
+
         </strong>
 
       </div>
 
+
       <div class="comparison-difference">
 
         前回比：
-        ${sign}${formatNumber(difference)}
-        kg
+
+        ${kgSign}
+        ${formatNumber(
+          difference
+        )} kg
+
+        <br>
+
+        ${percentSign}
+        ${percentage.toFixed(1)}%
 
       </div>
 
